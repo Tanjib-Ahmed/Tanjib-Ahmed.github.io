@@ -4,28 +4,31 @@ import path from "path";
 import { createServer } from "./server";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  base: mode === "production" ? "/Tanjib_Site/" : "/",
-  server: {
-    host: "::",
-    port: 8080,
-    fs: {
-      allow: ["./client", "./shared", "./"],
-      deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
+export default defineConfig(({ mode }) => {
+  console.log('Building for mode:', mode);
+  return {
+    base: mode === "production" ? "/Tanjib_Site/" : "/",
+    server: {
+      host: "::",
+      port: 8080,
+      fs: {
+        allow: ["./client", "./shared", "./"],
+        deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
+      },
     },
-  },
-  build: {
-    outDir: "dist/spa",
-  },
-  plugins: [react(), expressPlugin()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./client"),
-      "@shared": path.resolve(__dirname, "./shared"),
+    build: {
+      outDir: "dist/spa",
     },
-    dedupe: ["react", "react-dom"],
-  },
-}));
+    plugins: [react(), expressPlugin()],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./client"),
+        "@shared": path.resolve(__dirname, "./shared"),
+      },
+      dedupe: ["react", "react-dom"],
+    },
+  };
+});
 
 function expressPlugin(): Plugin {
   return {
