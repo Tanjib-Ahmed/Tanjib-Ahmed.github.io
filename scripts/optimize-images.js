@@ -6,62 +6,53 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const assetsDir = path.resolve(__dirname, '../client/assets');
+// Target directory: client/assets/projects/other
+const targetDir = path.resolve(__dirname, '../client/assets/projects/other');
 
-async function processFile(filePath) {
-    const ext = path.extname(filePath).toLowerCase();
-    if (!['.jpg', '.jpeg', '.png', '.webp'].includes(ext)) return;
-
-    const tempPath = filePath + '.temp';
-
-    try {
-        let pipeline = sharp(filePath);
-        const metadata = await pipeline.metadata();
-
-        let width = metadata.width;
-
-        // Determine max width based on directory
-        if (filePath.includes('logo')) {
-            if (width > 800) width = 800;
-        } else {
-            if (width > 1200) width = 1200;
-        }
-
-        pipeline = pipeline.resize({ width, withoutEnlargement: true });
-
-        if (ext === '.jpg' || ext === '.jpeg') {
-            pipeline = pipeline.jpeg({ quality: 80, mozjpeg: true });
-        } else if (ext === '.png') {
-            pipeline = pipeline.png({ quality: 80, compressionLevel: 9 });
-        } else if (ext === '.webp') {
-            pipeline = pipeline.webp({ quality: 80 });
-        }
-
-        await pipeline.toFile(tempPath);
-
-        // Replace original file
-        fs.unlinkSync(filePath);
-        fs.renameSync(tempPath, filePath);
-
-        console.log(`Optimized: ${filePath}`);
-    } catch (err) {
-        console.error(`Error processing ${filePath}:`, err);
-        if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
-    }
+if (!fs.existsSync(targetDir)) {
+    console.error(`Target directory not found: ${targetDir}`);
+    process.exit(1);
 }
 
-async function walkDir(dir) {
-    const files = fs.readdirSync(dir);
+async function optimizeImages() {
+    const files = fs.readdirSync(targetDir);
+
     for (const file of files) {
-        const filePath = path.join(dir, file);
-        const stat = fs.statSync(filePath);
-        if (stat.isDirectory()) {
-            await walkDir(filePath);
-        } else {
-            await processFile(filePath);
+        if (file.match(/\.(jpg|jpeg|png|webp)$/i)) {
+            const filePath = path.join(targetDir, file);
+            const tempFilePath = path.join(targetDir, `temp-${file}`);
+
+            try {
+                const originalSize = fs.statSync(filePath).size;
+                console.log(`Optimizing ${file} (${(originalSize / 1024 / 1024).toFixed(2)} MB)...`);
+
+                // Process to buffer first
+                const buffer = await sharp(filePath)
+                    .resize(1920, 1920, { // Max width/height
+                        fit: 'inside',
+                        withoutEnlargement: true
+                    })
+                    .jpeg({ quality: 80, mozjpeg: true })
+                    .toBuffer();
+
+                // Write to temp file
+                fs.writeFileSync(tempFilePath, buffer);
+
+                // Replace original
+                // fs.renameSync(tempFilePath, filePath); // This might still fail if locked
+                // Let's try copy and delete
+                fs.copyFileSync(tempFilePath, filePath);
+                fs.unlinkSync(tempFilePath);
+
+                const newSize = fs.statSync(filePath).size;
+                console.log(`  -> Done! New size: ${(newSize / 1024 / 1024).toFixed(2)} MB (${((1 - newSize / originalSize) * 100).toFixed(0)}% reduction)`);
+            } catch (err) {
+                console.error(`  -> Error optimizing ${file}:`, err);
+                // Clean up temp if exists
+                if (fs.existsSync(tempFilePath)) fs.unlinkSync(tempFilePath);
+            }
         }
     }
 }
 
-console.log('Starting image optimization...');
-walkDir(assetsDir).then(() => console.log('Optimization complete!'));
+optimizeImages();
