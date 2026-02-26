@@ -13,7 +13,7 @@ export default function Index() {
   return (
     <div className="dark min-h-screen bg-background text-foreground">
       <Navbar />
-      <div className="transition-all duration-300">
+      <div className="transition-all duration-300 overflow-x-hidden">
         <main>
           <Hero />
           <Projects />

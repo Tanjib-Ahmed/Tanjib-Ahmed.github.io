@@ -64,19 +64,19 @@ const CarouselRow = ({
                 ? (index % 2 === 0 ? 1 : 4 / 5)
                 : (typeof aspectRatio === "number" ? aspectRatio : 16 / 10);
 
-              // Adjust container width based on ratio to maintain consistent height
+              // Adjust container width based on ratio to maintain consistent height (Mobile h-48 = 192px, Desktop h-80 = 320px)
               const widthClass = title === "Logo Designs"
-                ? "w-72 md:w-80"
+                ? "w-48 md:w-80"
                 : title === "Thumbnail Designs"
-                  ? "w-[455px] md:w-[568px]" // ~16:9 relative to h-64(256px) and h-80(320px)
+                  ? "w-[341px] md:w-[568px]" // ~16:9 relative to h-48(192px) and h-80(320px)
                   : currentRatio === 1
-                    ? "w-72 md:w-[350px]" // Square
-                    : "w-72 md:w-[280px]"; // Portrait 4:5
+                    ? "w-48 md:w-[350px]" // Square
+                    : "w-[153px] md:w-[280px]"; // Portrait 4:5
 
               return (
                 <div
                   key={`${title}-${index}`}
-                  className={`${widthClass} flex-shrink-0 relative group/item transition-all duration-500 z-0 p-2 [perspective:1000px] h-64 md:h-80`}
+                  className={`${widthClass} flex-shrink-0 relative group/item transition-all duration-500 z-0 p-2 [perspective:1000px] h-48 md:h-80`}
                 >
                   <div className={`overflow-hidden transition-all duration-500 rounded-3xl border border-white/10 relative h-full w-full bg-[#1A1A1A] group-hover/item:[transform:rotateX(5deg)_rotateY(-5deg)_scale(1.02)] shadow-xl group-hover/item:shadow-primary/20`}>
                     <img
@@ -112,7 +112,7 @@ export const Projects = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl md:text-8xl font-display font-black mb-6 tracking-tighter uppercase italic bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent pb-2">
+          <h2 className="text-4xl sm:text-5xl md:text-8xl font-display font-black mb-6 tracking-tighter uppercase italic bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent pb-2">
             Selected Work
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">

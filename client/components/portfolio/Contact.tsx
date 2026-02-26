@@ -49,7 +49,7 @@ export const Contact = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h2 className="text-5xl md:text-8xl font-display font-black mb-8 tracking-tighter uppercase italic bg-gradient-to-br from-white via-white/80 to-white/50 bg-clip-text text-transparent">
+          <h2 className="text-4xl sm:text-5xl md:text-8xl font-display font-black mb-8 tracking-tighter uppercase italic bg-gradient-to-br from-white via-white/80 to-white/50 bg-clip-text text-transparent">
             Let's Talk.
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">

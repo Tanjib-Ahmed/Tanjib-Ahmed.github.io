@@ -18,7 +18,7 @@ export const Hero = () => {
             Welcome to my Portfolio
           </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-[80px] font-display font-black leading-[1.1] pb-6 mb-4 tracking-tight bg-gradient-to-br from-white via-white to-white/40 bg-clip-text text-transparent drop-shadow-sm">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-display font-black leading-[1.1] pb-6 mb-4 tracking-tight bg-gradient-to-br from-white via-white to-white/40 bg-clip-text text-transparent drop-shadow-sm">
             {siteConfig.heroTitle || "Graphic Designer & Creative Visualizer"}
           </h1>
 
