@@ -34,7 +34,7 @@ export const Hero = () => {
               </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="rounded-full px-8 py-6 text-base font-bold bg-white text-black hover:bg-white/90 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] cursor-pointer border-none">
-              <a href="#contact">Hire Me</a>
+              <a href="#contact">Contact me</a>
             </Button>
           </div>
 

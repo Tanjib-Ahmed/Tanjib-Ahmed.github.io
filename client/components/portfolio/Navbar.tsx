@@ -71,7 +71,7 @@ export const Navbar = () => {
           <div className="flex items-center gap-3">
             <a
               href="#contact"
-              className="hidden md:inline-flex px-6 py-2.5 rounded-full text-sm font-bold bg-white/10 text-white hover:bg-white hover:text-black transition-all duration-300 border border-white/20 hover:border-white shadow-lg shadow-black/20"
+              className="hidden md:inline-flex px-6 py-2.5 rounded-full text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 border border-transparent shadow-[0_0_20px_rgba(139,92,246,0.3)]"
             >
               Hire Me
             </a>
