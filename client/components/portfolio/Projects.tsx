@@ -68,7 +68,7 @@ const CarouselRow = ({
               const widthClass = title === "Logo Designs"
                 ? "w-72 md:w-80"
                 : title === "Thumbnail Designs"
-                  ? "w-72 md:w-[450px]"
+                  ? "w-[455px] md:w-[568px]" // ~16:9 relative to h-64(256px) and h-80(320px)
                   : currentRatio === 1
                     ? "w-72 md:w-[350px]" // Square
                     : "w-72 md:w-[280px]"; // Portrait 4:5
@@ -76,18 +76,17 @@ const CarouselRow = ({
               return (
                 <div
                   key={`${title}-${index}`}
-                  className={`${widthClass} flex-shrink-0 relative group/item transition-all duration-300 z-0`}
+                  className={`${widthClass} flex-shrink-0 relative group/item transition-all duration-500 z-0 p-2 [perspective:1000px] h-64 md:h-80`}
                 >
-                  <div className={`overflow-hidden transition-all duration-300 rounded-none border-x border-background/20 relative h-full bg-secondary/80`}>
-                    <AspectRatio ratio={currentRatio}>
-                      <img
-                        src={item}
-                        alt={`${title} project`}
-                        className="object-cover w-full h-full transition-all duration-300"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </AspectRatio>
+                  <div className={`overflow-hidden transition-all duration-500 rounded-3xl border border-white/10 relative h-full w-full bg-[#1A1A1A] group-hover/item:[transform:rotateX(5deg)_rotateY(-5deg)_scale(1.02)] shadow-xl group-hover/item:shadow-primary/20`}>
+                    <img
+                      src={item}
+                      alt={`${title} project`}
+                      className="object-cover w-full h-full transition-all duration-500 group-hover/item:scale-110"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </div>
                 </div>
               );

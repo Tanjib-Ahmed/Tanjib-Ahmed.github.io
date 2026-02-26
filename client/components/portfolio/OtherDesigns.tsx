@@ -48,24 +48,39 @@ export const OtherDesigns = ({ items }: { items: string[] }) => {
                                 animationDirection: rowIndex % 2 === 0 ? 'reverse' : 'normal'
                             }}
                         >
-                            {[...rowItems, ...rowItems, ...rowItems].map((item, index) => (
-                                <div
-                                    key={`grid-item-${rowIndex}-${index}`}
-                                    className="relative group/item transition-all duration-300 cursor-zoom-in
-                                        w-[300px] h-[200px] flex-shrink-0 z-0 hover:z-50 hover:scale-[1.7]"
-                                >
-                                    <div className="absolute inset-0 overflow-hidden transition-all duration-300 rounded-none border-x border-background/20 group-hover/item:rounded-2xl group-hover/item:shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)] group-hover/item:border-2 group-hover/item:border-primary/50 bg-secondary/80"> {/* Flattened borders by default */}
-                                        <img
-                                            src={item}
-                                            alt={`Other design ${rowIndex}-${index}`}
-                                            className="h-full w-full object-cover grayscale opacity-70 transition-all duration-300 group-hover/item:grayscale-0 group-hover/item:opacity-100 group-hover/item:object-contain"
-                                            loading="lazy"
-                                            decoding="async"
-                                        />
+                            {[...rowItems, ...rowItems, ...rowItems].map((item, index) => {
+                                // Variable width to simulate mixed aspect ratio distribution and fill space natively
+                                const widthClass = index % 3 === 0 ? "w-72 md:w-[450px]" : index % 2 === 0 ? "w-72 md:w-[350px]" : "w-72 md:w-80";
+
+                                return (
+                                    <div
+                                        key={`grid-item-${rowIndex}-${index}`}
+                                        className={`${widthClass} relative group/item transition-all duration-500 cursor-zoom-in flex-shrink-0 z-0 hover:z-50 p-2 h-64 md:h-80`}
+                                    >
+                                        {/* Base Grid Image (Cropped) */}
+                                        <div className="absolute inset-2 overflow-hidden transition-all duration-500 rounded-3xl border border-white/5 bg-[#1A1A1A] group-hover/item:opacity-0 group-hover/item:scale-95">
+                                            <img
+                                                src={item}
+                                                alt={`Other design base ${rowIndex}-${index}`}
+                                                className="h-full w-full object-cover grayscale opacity-70 transition-all duration-500"
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                        </div>
+
+                                        {/* Hover Popout Image (Full Native Aspect Ratio) */}
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex items-center justify-center opacity-0 scale-75 group-hover/item:opacity-100 group-hover/item:scale-105 transition-all duration-500 pointer-events-none">
+                                            <img
+                                                src={item}
+                                                alt={`Other design full ${rowIndex}-${index}`}
+                                                className="w-auto h-auto min-w-[250px] max-w-[90vw] max-h-[300px] md:max-h-[400px] object-contain rounded-2xl drop-shadow-[0_0_50px_rgba(139,92,246,0.6)]"
+                                                loading="lazy"
+                                                decoding="async"
+                                            />
+                                        </div>
                                     </div>
-                                    {/* Overlay for "View" hint could go here, but hover effect is strong enough */}
-                                </div>
-                            ))}
+                                )
+                            })}
                         </div>
                     </div>
                 ))}

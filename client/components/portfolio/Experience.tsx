@@ -1,12 +1,11 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { Briefcase, GraduationCap, Download, User, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
+import { Download, MapPin, Briefcase, GraduationCap, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/data/config";
 import { useToast } from "@/components/ui/use-toast";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import React from "react";
 
-// About Image Logic
 const aboutImages = import.meta.glob('@/assets/about/*', { eager: true, query: '?url', import: 'default' });
 const aboutImage = Object.values(aboutImages)[0] || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1200";
 
@@ -17,7 +16,6 @@ export const Experience = () => {
     const handleSocialClick = (e: React.MouseEvent<HTMLAnchorElement>, link: typeof siteConfig.socialLinks[0]) => {
         if (link.label === "Email") {
             e.preventDefault();
-            // Fallback for older browsers or insecure contexts
             const copyToClipboard = async (text: string) => {
                 try {
                     await navigator.clipboard.writeText(text);
@@ -35,7 +33,6 @@ export const Experience = () => {
                         document.body.removeChild(textArea);
                         toast({ description: "Email copied to clipboard!", duration: 3000 });
                     } catch (fallbackErr) {
-                        console.error('Failed to copy', err);
                         toast({ variant: "destructive", description: "Failed to copy email.", duration: 3000 });
                     }
                 }
@@ -45,24 +42,30 @@ export const Experience = () => {
     };
 
     return (
-        <section id="about" className="py-24 px-6 relative bg-secondary/5 overflow-hidden min-h-screen flex flex-col justify-center">
+        <section id="about" className="py-24 md:py-32 px-6 relative bg-background overflow-hidden min-h-screen flex flex-col justify-center">
             <div className="container mx-auto max-w-6xl">
 
                 {/* --- HEADER TITLE --- */}
-                <motion.h2
+                <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-4xl md:text-7xl font-display font-black mb-16 text-center tracking-tighter bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent pb-2 uppercase italic"
+                    className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6"
                 >
-                    The Journey
-                </motion.h2>
+                    <h2 className="text-4xl md:text-6xl lg:text-[70px] font-display font-black tracking-tight text-white leading-none">
+                        Driven by<br />
+                        <span className="text-primary italic">Strategy.</span>
+                    </h2>
+                    <p className="text-muted-foreground max-w-sm text-lg md:mb-2">
+                        My journey bridging the gap between technical precision and artistic expression.
+                    </p>
+                </motion.div>
 
                 <Tabs defaultValue="about" className="w-full">
 
                     {/* --- TABS NAVIGATION --- */}
-                    <div className="flex justify-center mb-16">
-                        <TabsList className="bg-secondary/50 backdrop-blur-md border border-white/10 p-1 rounded-full h-auto">
+                    <div className="flex justify-start md:justify-center mb-16 overflow-x-auto pb-4 hide-scrollbar">
+                        <TabsList className="bg-[#1A1A1A] border border-white/10 p-1.5 rounded-full h-auto inline-flex shadow-xl">
                             <TabTrigger value="about" icon={<User className="w-4 h-4" />}>About Me</TabTrigger>
                             <TabTrigger value="employment" icon={<Briefcase className="w-4 h-4" />}>Employment</TabTrigger>
                             <TabTrigger value="education" icon={<GraduationCap className="w-4 h-4" />}>Education</TabTrigger>
@@ -71,21 +74,31 @@ export const Experience = () => {
 
                     {/* --- TAB: ABOUT ME --- */}
                     <TabsContent value="about" className="outline-none focus:outline-none mt-0">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center bg-[#1A1A1A] border border-white/5 rounded-[40px] p-8 md:p-12 relative overflow-hidden group hover:border-white/10 transition-colors duration-500">
+
+                            {/* Subtle background glow */}
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
+
                             {/* Image - Spans 5 columns */}
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.5 }}
-                                className="lg:col-span-5 relative"
+                                className="md:col-span-5 relative"
                             >
-                                <div className="aspect-[4/5] bg-secondary/50 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl glass-card relative group">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent z-10 opactiy-50" />
+                                <div className="aspect-[4/5] bg-background rounded-3xl overflow-hidden border border-white/10 relative">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 opacity-60" />
                                     <img
                                         src={aboutImage as string}
                                         alt="Portrait"
-                                        className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                                        className="object-cover w-full h-full grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 hover:scale-105"
                                     />
+                                    <div className="absolute bottom-6 left-6 z-20">
+                                        <div className="flex items-center text-primary font-medium bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 text-sm">
+                                            <MapPin className="w-4 h-4 mr-2" />
+                                            Dhaka, Bangladesh
+                                        </div>
+                                    </div>
                                 </div>
                             </motion.div>
 
@@ -94,39 +107,40 @@ export const Experience = () => {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
-                                className="lg:col-span-7 space-y-8"
+                                className="md:col-span-7 space-y-8 relative z-10"
                             >
-                                <h3 className="text-4xl font-display font-bold">
-                                    Visualizing the <span className="text-primary">Impossible.</span>
+                                <h3 className="text-3xl lg:text-5xl font-display font-bold text-white leading-tight">
+                                    Visualizing the <span className="text-transparent text-stroke group-hover:text-primary transition-colors duration-500">Impossible.</span>
                                 </h3>
-                                <p className="text-xl text-muted-foreground leading-relaxed">
+                                <p className="text-lg text-white/60 leading-relaxed font-light">
                                     I'm Tanjib Ahmed, a dynamic and innovative Graphic Designer with over four years of experience in creating impactful visual solutions. I blend deep-blue aesthetics with purposeful pixels to help brands stand out.
                                 </p>
-                                <p className="text-xl text-muted-foreground leading-relaxed">
+                                <p className="text-lg text-white/60 leading-relaxed font-light">
                                     With a background in Computer Science, I bridge the gap between technical precision and artistic expression. My work isn't just about looking good—it's about telling a story that resonates.
                                 </p>
 
-                                <div className="pt-4 flex flex-wrap gap-4">
-                                    {siteConfig.socialLinks.filter(link => !link.footerOnly).map((link, i) => (
-                                        <a
-                                            key={i}
-                                            href={link.label === "Email" ? `mailto:${link.href}` : link.href}
-                                            target={link.label === "Email" ? undefined : "_blank"}
-                                            rel={link.label === "Email" ? undefined : "noopener noreferrer"}
-                                            onClick={(e) => handleSocialClick(e, link)}
-                                            className="w-12 h-12 bg-secondary/50 border border-white/10 flex items-center justify-center rounded-xl hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110"
-                                        >
-                                            <link.icon className="w-5 h-5" />
-                                        </a>
-                                    ))}
-
-                                    {/* UPDATED BUTTON TEXT: "Resume" only */}
-                                    <Button asChild size="lg" className="h-12 rounded-xl px-8 text-lg bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20 hover:scale-105 transition-all duration-300">
+                                <div className="pt-6 flex flex-wrap items-center gap-4">
+                                    <Button asChild size="lg" className="rounded-full px-8 py-6 bg-white text-black hover:bg-white/90 transition-all text-base font-bold shadow-lg shadow-white/10 cursor-pointer">
                                         <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer">
                                             <Download className="mr-2 w-5 h-5" />
-                                            Resume
+                                            Download Resume
                                         </a>
                                     </Button>
+
+                                    <div className="flex gap-2">
+                                        {siteConfig.socialLinks.filter(link => !link.footerOnly).map((link, i) => (
+                                            <a
+                                                key={i}
+                                                href={link.label === "Email" ? `mailto:${link.href}` : link.href}
+                                                target={link.label === "Email" ? undefined : "_blank"}
+                                                rel={link.label === "Email" ? undefined : "noopener noreferrer"}
+                                                onClick={(e) => handleSocialClick(e, link)}
+                                                className="w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center rounded-full text-white/70 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                                            >
+                                                <link.icon className="w-5 h-5" />
+                                            </a>
+                                        ))}
+                                    </div>
                                 </div>
                             </motion.div>
                         </div>
@@ -134,8 +148,8 @@ export const Experience = () => {
 
                     {/* --- TAB: EMPLOYMENT --- */}
                     <TabsContent value="employment" className="outline-none focus:outline-none mt-0">
-                        <ExperienceList
-                            items={[
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {[
                                 {
                                     title: "Graphic Designer",
                                     subtitle: "Game Over Zone",
@@ -171,14 +185,16 @@ export const Experience = () => {
                                     location: "Dhaka",
                                     description: ["Developed branding consistency and visual content for video platforms."]
                                 }
-                            ]}
-                        />
+                            ].map((item, index) => (
+                                <ExperienceItem key={index} {...item} index={index} />
+                            ))}
+                        </div>
                     </TabsContent>
 
                     {/* --- TAB: EDUCATION --- */}
                     <TabsContent value="education" className="outline-none focus:outline-none mt-0">
-                        <ExperienceList
-                            items={[
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {[
                                 {
                                     title: "BSc in Computer Science & Engineering",
                                     subtitle: "Southeast University",
@@ -203,8 +219,10 @@ export const Experience = () => {
                                     period: "Jan 2016 – Dec 2016",
                                     location: "Dhaka"
                                 }
-                            ]}
-                        />
+                            ].map((item, index) => (
+                                <ExperienceItem key={index} {...item} index={index} />
+                            ))}
+                        </div>
                     </TabsContent>
                 </Tabs>
             </div>
@@ -215,7 +233,7 @@ export const Experience = () => {
 const TabTrigger = ({ value, children, icon }: { value: string, children: React.ReactNode, icon: React.ReactNode }) => (
     <TabsTrigger
         value={value}
-        className="rounded-full px-6 py-3 text-sm font-medium data-[state=active]:bg-primary data-[state=active]:text-white transition-all duration-300 flex items-center gap-2"
+        className="rounded-full px-6 py-3 text-sm flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-primary data-[state=active]:text-white font-medium text-white/50 hover:text-white"
     >
         {icon}
         {children}
@@ -228,85 +246,49 @@ interface TimelineItemProps {
     period: string;
     location: string;
     description?: string[];
+    index: number;
 }
 
-const ExperienceList = ({ items }: { items: TimelineItemProps[] }) => {
-    return (
-        <div className="flex flex-col gap-4 max-w-3xl mx-auto">
-            {items.map((item, index) => (
-                <ExperienceItem key={index} {...item} index={index} />
-            ))}
-        </div>
-    );
-};
-
-const ExperienceItem = ({ title, subtitle, period, location, description, index }: TimelineItemProps & { index: number }) => {
+const ExperienceItem = ({ title, subtitle, period, location, description, index }: TimelineItemProps) => {
     const isActive = period.toLowerCase().includes("present");
-    const [isHovered, setIsHovered] = useState(false);
 
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            className={`
-                relative p-6 rounded-2xl border transition-all duration-500 overflow-hidden group cursor-default
-                ${isActive
-                    ? "bg-primary/5 border-primary/40 shadow-[0_0_20px_rgba(124,58,237,0.1)]"
-                    : "bg-secondary/30 border-white/5 hover:bg-secondary/50 hover:border-white/10"}
-            `}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+            className={`p-8 rounded-[30px] border transition-all duration-500 overflow-hidden relative group hover:-translate-y-1 ${isActive ? "bg-[#1A1A1A] border-primary/30 shadow-[0_0_30px_rgba(124,58,237,0.05)]" : "bg-[#1A1A1A] border-white/5 hover:border-white/10"}`}
         >
-            {/* Glow effect for Active Items */}
             {isActive && (
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-transparent opacity-50" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[50px] pointer-events-none" />
             )}
 
-            <div className="relative z-10">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-4 mb-2">
-                    <h3 className={`text-xl font-bold ${isActive ? "text-primary" : "text-white group-hover:text-primary transition-colors"}`}>
+            <div className="relative z-10 flex flex-col h-full">
+                <div className="flex justify-between items-start gap-4 mb-4">
+                    <h3 className={`text-xl md:text-2xl font-display font-bold ${isActive ? "text-white" : "text-white group-hover:text-primary transition-colors"}`}>
                         {subtitle}
                     </h3>
-                    <span className={`
-                        text-xs font-mono px-3 py-1 rounded-full w-fit uppercase tracking-wider
-                        ${isActive
-                            ? "bg-primary/20 text-primary border border-primary/20"
-                            : "bg-white/5 text-muted-foreground border border-white/5"}
-                    `}>
+                    <span className={`text-[10px] md:text-xs font-mono px-3 py-1.5 rounded-full uppercase tracking-widest shrink-0 ${isActive ? "bg-primary text-white" : "bg-white/5 text-white/50 border border-white/5"}`}>
                         {period}
                     </span>
                 </div>
 
-                <h4 className="text-lg text-white/80 font-medium mb-1">{title}</h4>
-
-                {/* Animated Details */}
-                <motion.div
-                    initial={false}
-                    animate={{ height: isHovered ? "auto" : 0, opacity: isHovered ? 1 : 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                >
-                    <div className="pt-4 mt-2 border-t border-white/5">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                            <MapPin className="w-4 h-4 text-primary" />
-                            {location}
-                        </div>
-                        {description && (
-                            <div className="space-y-1">
-                                {description.map((line, i) => (
-                                    <p key={i} className="text-sm text-muted-foreground/80 leading-relaxed pl-6 border-l-2 border-primary/30">
-                                        {line}
-                                    </p>
-                                ))}
-                            </div>
-                        )}
+                <div className="mb-6 flex-grow">
+                    <h4 className="text-lg text-white/80 font-medium mb-1">{title}</h4>
+                    <div className="flex items-center gap-1.5 text-sm text-primary/80 mb-3">
+                        <MapPin className="w-3.5 h-3.5" />
+                        {location}
                     </div>
-                </motion.div>
+                </div>
 
-                {/* Decoration for unexpanded state hint */}
-                {!isHovered && (
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-white/10 rounded-full opacity-50 group-hover:opacity-0 transition-opacity duration-300" />
+                {description && (
+                    <div className="pt-4 border-t border-white/10">
+                        {description.map((line, i) => (
+                            <p key={i} className="text-sm text-white/50 leading-relaxed font-light">
+                                {line}
+                            </p>
+                        ))}
+                    </div>
                 )}
             </div>
         </motion.div>
