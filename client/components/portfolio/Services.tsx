@@ -5,32 +5,32 @@ const skills = [
   {
     icon: <Palette className="w-8 h-8" />,
     title: "Social Media Design",
-    description: "Engaging visuals for Facebook, Instagram, and other platforms to boost brand presence."
+    description: "I make posts for Facebook and Instagram. This helps your brand get noticed."
   },
   {
     icon: <Layers className="w-8 h-8" />,
     title: "Print Design",
-    description: "High-quality brochures, flyers, posters, and marketing materials ready for production."
+    description: "I design flyers, posters, and brochures. These are ready for you to print."
   },
   {
     icon: <Monitor className="w-8 h-8" />,
     title: "Website Graphics",
-    description: "Custom assets and visual elements that enhance user experience on web platforms."
+    description: "I make custom shapes and images for your website. They make your site look great."
   },
   {
     icon: <PenTool className="w-8 h-8" />,
     title: "Branding & Identity",
-    description: "Comprehensive brand guidelines, logos, and visual systems that tell your story."
+    description: "I design logos and brand guides. These help tell your story to the world."
   },
   {
     icon: <LayoutTemplate className="w-8 h-8" />,
     title: "UI/UX Design",
-    description: "User-centric interface designs that prioritize usability and aesthetic appeal."
+    description: "I design screens for apps and websites. I make them easy to use."
   },
   {
     icon: <MessageSquare className="w-8 h-8" />,
     title: "Soft Skills",
-    description: "Customer service, team collaboration, and meeting tight deadlines with high accuracy."
+    description: "I talk well with clients and work great in teams. I also finish work on time."
   }
 ];
 
@@ -40,9 +40,9 @@ export const Services = () => {
       <div className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left -z-10" />
       <div className="container mx-auto">
         <div className="max-w-2xl mb-20">
-          <h2 className="text-4xl md:text-6xl font-display font-extrabold mb-6 bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent pb-2">Skills & Expertise</h2>
+          <h2 className="text-4xl md:text-6xl font-display font-extrabold mb-6 bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent pb-2">What I Can Do</h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            A diverse skillset combining technical proficiency in Adobe Creative Suite with creative problem-solving.
+            I solve problems and make cool things using Adobe tools.
           </p>
         </div>
 

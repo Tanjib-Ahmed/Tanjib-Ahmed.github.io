@@ -53,7 +53,7 @@ export const Contact = () => {
             Let's Talk.
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Have a project in mind or just want to say hi? I'm always open to discussing new ideas and opportunities.
+            Do you have a project in mind? Or maybe you just want to say hi. I am always happy to chat.
           </p>
         </motion.div>
 
@@ -102,7 +102,7 @@ export const Contact = () => {
 
           {/* Social Links */}
           <div className="relative z-10">
-            <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-8">Connect Instantly</p>
+            <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-8">Find Me Online</p>
             <div className="flex flex-wrap justify-center gap-6">
               {siteConfig.socialLinks
                 .filter(link => ["WhatsApp", "LinkedIn", "Telegram", "Facebook"].includes(link.label))

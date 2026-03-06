@@ -65,10 +65,11 @@ const CarouselRow = ({
                 : (typeof aspectRatio === "number" ? aspectRatio : 16 / 10);
 
               // Adjust container width based on ratio to maintain consistent height (Mobile h-48 = 192px, Desktop h-80 = 320px)
-              const widthClass = title === "Logo Designs"
+              const isThumbnail = title === "Thumbnails";
+              const widthClass = title === "Logos"
                 ? "w-48 md:w-80"
-                : title === "Thumbnail Designs"
-                  ? "w-[341px] md:w-[568px]" // ~16:9 relative to h-48(192px) and h-80(320px)
+                : isThumbnail
+                  ? "w-auto" // Width calculated via aspect-ratio style
                   : currentRatio === 1
                     ? "w-48 md:w-[350px]" // Square
                     : "w-[153px] md:w-[280px]"; // Portrait 4:5
@@ -77,6 +78,7 @@ const CarouselRow = ({
                 <div
                   key={`${title}-${index}`}
                   className={`${widthClass} flex-shrink-0 relative group/item transition-all duration-500 z-0 p-2 [perspective:1000px] h-48 md:h-80`}
+                  style={isThumbnail ? { aspectRatio: "16/9" } : undefined}
                 >
                   <div className={`overflow-hidden transition-all duration-500 rounded-3xl border border-white/10 relative h-full w-full bg-[#1A1A1A] group-hover/item:[transform:rotateX(5deg)_rotateY(-5deg)_scale(1.02)] shadow-xl group-hover/item:shadow-primary/20`}>
                     <img
@@ -113,10 +115,10 @@ export const Projects = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl sm:text-5xl md:text-8xl font-display font-black mb-6 tracking-tighter uppercase italic bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent pb-2">
-            Selected Work
+            Some of My Work
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Exploring the boundaries of visual communication through specialized design categories.
+            Here are some designs I have made for different projects over the years.
           </p>
         </motion.div>
       </div>
@@ -124,7 +126,7 @@ export const Projects = () => {
       <div className="space-y-12">
         {logoList.length > 0 && (
           <CarouselRow
-            title="Logo Designs"
+            title="Logos"
             items={logoList}
             direction="left"
             aspectRatio={1}
@@ -133,7 +135,7 @@ export const Projects = () => {
         )}
         {thumbnailList.length > 0 && (
           <CarouselRow
-            title="Thumbnail Designs"
+            title="Thumbnails"
             items={thumbnailList}
             direction="right"
             aspectRatio={16 / 9}
@@ -142,7 +144,7 @@ export const Projects = () => {
         )}
         {socialList.length > 0 && (
           <CarouselRow
-            title="Social Media Designs"
+            title="Social Media Posts"
             items={socialList}
             direction="left"
             aspectRatio={4 / 5}

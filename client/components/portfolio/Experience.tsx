@@ -53,11 +53,11 @@ export const Experience = () => {
                     className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6"
                 >
                     <h2 className="text-4xl md:text-6xl lg:text-[70px] font-display font-black tracking-tight text-white leading-none">
-                        Driven by<br />
-                        <span className="text-primary italic">Strategy.</span>
+                        Designed with<br />
+                        <span className="text-primary italic">Purpose.</span>
                     </h2>
                     <p className="text-muted-foreground max-w-sm text-lg md:mb-2">
-                        My journey bridging the gap between technical precision and artistic expression.
+                        My journey of learning how to build and design.
                     </p>
                 </motion.div>
 
@@ -110,13 +110,13 @@ export const Experience = () => {
                                 className="md:col-span-7 space-y-8 relative z-10"
                             >
                                 <h3 className="text-3xl lg:text-5xl font-display font-bold text-white leading-tight">
-                                    Visualizing the <span className="text-transparent text-stroke group-hover:text-primary transition-colors duration-500">Impossible.</span>
+                                    Making Cool Ideas <span className="text-transparent text-stroke group-hover:text-primary transition-colors duration-500">Real.</span>
                                 </h3>
                                 <p className="text-lg text-white/60 leading-relaxed font-light">
-                                    I'm Tanjib Ahmed, a dynamic and innovative Graphic Designer with over four years of experience in creating impactful visual solutions. I blend deep-blue aesthetics with purposeful pixels to help brands stand out.
+                                    I am Tanjib Ahmed. I have been a graphic designer for four years. I make designs that help your brand look great and stand out.
                                 </p>
                                 <p className="text-lg text-white/60 leading-relaxed font-light">
-                                    With a background in Computer Science, I bridge the gap between technical precision and artistic expression. My work isn't just about looking good—it's about telling a story that resonates.
+                                    I study Computer Science. This helps me mix exact math with fun art. My work looks good and tells a clear story.
                                 </p>
 
                                 <div className="pt-6 flex flex-wrap items-center gap-4">
@@ -155,35 +155,35 @@ export const Experience = () => {
                                     subtitle: "Game Over Zone",
                                     period: "Jan 2026 – Present",
                                     location: "Dhaka",
-                                    description: ["Creating dynamic visual content and branding for gaming and digital media."]
+                                    description: ["I make cool posts and branding for gaming media."]
                                 },
                                 {
                                     title: "Graphic Designer (Volunteer)",
                                     subtitle: "Alokito Poribesh Foundation",
                                     period: "May 2024 – Present",
                                     location: "Dhaka",
-                                    description: ["Contributing to non-profit initiatives through impactful visual storytelling and design."]
+                                    description: ["I design stories and graphics to help a charity grow."]
                                 },
                                 {
                                     title: "Graphic Designer",
                                     subtitle: "A Trip Z",
                                     period: "Mar 2024 – Apr 2025",
                                     location: "Dhaka",
-                                    description: ["Designed social media campaigns and diverse marketing initiatives."]
+                                    description: ["I made lots of social media posts and ads."]
                                 },
                                 {
                                     title: "Graphic Designer",
                                     subtitle: "Hidayah Shop",
                                     period: "Mar 2022 – Jan 2023",
                                     location: "Lakshmipur",
-                                    description: ["Boosted online presence through strategic social media designs."]
+                                    description: ["I helped the shop get more views with my designs."]
                                 },
                                 {
                                     title: "Thumbnail Designer",
                                     subtitle: "COCOEED",
                                     period: "Nov 2021 – May 2022",
                                     location: "Dhaka",
-                                    description: ["Developed branding consistency and visual content for video platforms."]
+                                    description: ["I made video thumbnails that fit the brand well."]
                                 }
                             ].map((item, index) => (
                                 <ExperienceItem key={index} {...item} index={index} />

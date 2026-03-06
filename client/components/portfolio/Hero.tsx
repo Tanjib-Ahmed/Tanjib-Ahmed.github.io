@@ -14,22 +14,22 @@ export const Hero = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-sm mb-8 text-white/70">
-            Welcome to my Portfolio
+          <div className="inline-block px-5 py-2 rounded-full border border-white/20 bg-white/10 text-sm mb-10 text-white/90 backdrop-blur-md shadow-lg shadow-black/20 font-medium tracking-wide uppercase">
+            Welcome to My Page
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] font-display font-black leading-[1.1] pb-6 mb-4 tracking-tight bg-gradient-to-br from-white via-white to-white/40 bg-clip-text text-transparent drop-shadow-sm">
-            {siteConfig.heroTitle || "Graphic Designer & Creative Visualizer"}
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[90px] font-display font-black leading-[1.05] pb-6 mb-6 tracking-tighter bg-gradient-to-b from-white via-white/90 to-white/60 bg-clip-text text-transparent drop-shadow-2xl">
+            {siteConfig.heroTitle || "I Design Graphics That Stand Out."}
           </h1>
 
-          <p className="text-lg md:text-xl text-white/50 mb-12 max-w-2xl leading-relaxed font-light mx-auto drop-shadow-sm">
+          <p className="text-xl md:text-2xl text-white/70 mb-14 max-w-3xl leading-relaxed font-light mx-auto drop-shadow-md">
             {siteConfig.heroSubtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="rounded-full px-8 py-6 text-base font-bold bg-white/5 text-white hover:bg-white hover:text-black transition-all duration-300 border border-white/10 hover:border-white shadow-lg cursor-pointer">
               <a href="#work">
-                Explore Work
+                See My Work
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
@@ -39,7 +39,7 @@ export const Hero = () => {
           </div>
 
           <div className="mt-24 block w-full">
-            <p className="text-sm text-white/40 mb-6 font-medium">Tools I use on a daily basis</p>
+            <p className="text-sm text-white/40 mb-6 font-medium">Tools I use every day</p>
             <div className="flex flex-wrap gap-4 justify-center items-center">
               {[
                 { name: "Photoshop", icon: "/tools/adobe-photoshop-svgrepo-com.svg" },
