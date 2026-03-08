@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, ArrowRight, Check, Copy } from "lucide-react";
+import { Mail, ArrowRight, Check, Copy, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/data/config";
 import { useToast } from "@/components/ui/use-toast";
@@ -35,6 +35,27 @@ export const Contact = () => {
         toast({ variant: "destructive", description: "Failed to copy email.", duration: 3000 });
       }
     }
+  };
+
+  const handleSaveContact = () => {
+    const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Tanjib Ahmed
+N:Ahmed;Tanjib;;;
+EMAIL;TYPE=INTERNET:tanjib.tanjib204@gmail.com
+TEL;TYPE=CELL:+8801815782269
+URL:https://Tanjib-Ahmed.github.io
+END:VCARD`;
+
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Tanjib_Ahmed.vcf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -80,9 +101,9 @@ export const Contact = () => {
               <Button
                 size="lg"
                 className="h-14 px-8 text-lg rounded-xl bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:scale-105 transition-all duration-300 group"
-                onClick={() => window.location.href = `mailto:${siteConfig.inquiryEmail}`}
+                onClick={handleSaveContact}
               >
-                Say Hello <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                Save Contact <Download className="ml-2 w-5 h-5 group-hover:-translate-y-1 transition-transform" />
               </Button>
 
               <Button
