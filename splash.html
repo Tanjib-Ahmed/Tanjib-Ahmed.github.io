@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thumbnail Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050505;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            width: 1200px;
+            height: 630px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .background {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px;
+            opacity: 0.4;
+            filter: blur(2px) grayscale(0.5);
+            z-index: 0;
+        }
+
+        .bg-card {
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(139, 92, 246, 0.15) 0%, rgba(5, 5, 5, 0.9) 80%);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding-bottom: 40px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-size: cover;
+            border: 2px solid #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .site-title {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .headline {
+            font-size: 72px;
+            font-weight: 900;
+            margin: 0;
+            line-height: 0.9;
+            background: linear-gradient(to bottom right, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -3px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #ccc;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .badge {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #a78bfa;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="bg-card" style="background-image: url('client/assets/projects/thumbnails/coco-Valorant-Thumbnaile-jett-rever.jpg')"></div>
+        <div class="bg-card" style="background-image: url('client/assets/projects/logos/Asset 16@2x-100.jpg')"></div>
+        <div class="bg-card" style="background-image: url('client/assets/projects/thumbnails/killjoy-thumb.jpg')"></div>
+        <div class="bg-card" style="background-image: url('client/assets/projects/other/starting-soon.jpg')"></div>
+    </div>
+    
+    <div class="overlay"></div>
+    
+    <div class="content">
+        <div class="badge">Portfolio Preview</div>
+        <div class="header">
+            <div class="logo-circle" style="background-image: url('client/assets/about/tanjib dp.jpg')"></div>
+            <div class="site-title">Tanjib Ahmed</div>
+        </div>
+        <h1 class="headline">Design Portfolio</h1>
+        <p class="subtitle">Graphic Designer & Creative Visualizer</p>
+    </div>
+</body>
+</html>

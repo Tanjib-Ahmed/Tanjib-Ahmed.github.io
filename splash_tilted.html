@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thumbnail Generator - Tilted Grid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050505;
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            width: 1200px;
+            height: 630px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .background-gradient {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.2) 0%, rgba(5, 5, 5, 1) 100%);
+            z-index: 1;
+        }
+
+        .grid-container {
+            position: absolute;
+            right: -100px;
+            top: -100px;
+            bottom: -100px;
+            width: 800px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            transform: perspective(1000px) rotateY(-25deg) rotateX(10deg) skewY(-5deg);
+            z-index: 0;
+        }
+
+        .grid-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .grid-column:nth-child(2) {
+            margin-top: 50px;
+        }
+
+        .grid-column:nth-child(3) {
+            margin-top: 100px;
+        }
+
+        .card {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background-color: #1a1a1a;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-content {
+            position: relative;
+            z-index: 2;
+            padding-left: 80px;
+            max-width: 500px;
+        }
+
+        .name {
+            font-size: 80px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 0;
+            letter-spacing: -1.5px;
+            background: linear-gradient(to right, #fff, #ddd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-bottom: 10px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #8b5cf6;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, #050505 30%, transparent 70%);
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-gradient"></div>
+    <div class="overlay"></div>
+
+    <div class="text-content">
+        <h1 class="name">Tanjib Ahmed</h1>
+        <div class="title">Designer</div>
+    </div>
+
+    <div class="grid-container">
+        <div class="grid-column">
+            <div class="card"
+                style="background-image: url('client/assets/projects/thumbnails/coco-Valorant-Thumbnaile-jett-rever.jpg')">
+            </div>
+            <div class="card" style="background-image: url('client/assets/projects/logos/Asset 16@2x-100.jpg')"></div>
+            <div class="card" style="background-image: url('client/assets/projects/thumbnails/killjoy-thumb.jpg')">
+            </div>
+        </div>
+        <div class="grid-column">
+            <div class="card" style="background-image: url('client/assets/projects/thumbnails/chamber-thumb.jpg')">
+            </div>
+            <div class="card" style="background-image: url('client/assets/projects/other/starting-soon.jpg')"></div>
+            <div class="card" style="background-image: url('client/assets/projects/thumbnails/workout.jpg')"></div>
+        </div>
+        <div class="grid-column">
+            <div class="card" style="background-image: url('client/assets/projects/logos/MistiBake Studio-01.jpg')">
+            </div>
+            <div class="card" style="background-image: url('client/assets/projects/thumbnails/rafinator valorant.jpg')">
+            </div>
+            <div class="card"
+                style="background-image: url('client/assets/projects/thumbnails/overwatch-2-reaper copy.jpg')"></div>
+        </div>
+    </div>
+</body>
+
+</html>
