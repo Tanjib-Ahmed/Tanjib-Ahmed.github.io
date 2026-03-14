@@ -66,19 +66,7 @@ END:VCARD`;
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 blur-[100px] rounded-full -z-10" />
 
       <div className="container mx-auto max-w-4xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <h2 className="text-4xl sm:text-5xl md:text-8xl font-display font-black mb-8 tracking-tighter uppercase italic bg-gradient-to-br from-white via-white/80 to-white/50 bg-clip-text text-transparent">
-            Let's Talk.
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Do you have a project in mind? Or maybe you just want to say hi. I am always happy to chat.
-          </p>
-        </motion.div>
+
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 max-w-7xl mx-auto relative">
           
