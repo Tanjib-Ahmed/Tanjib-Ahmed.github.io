@@ -6,5 +6,6 @@ export const socialLinks = [
     { icon: BehanceIcon, href: "https://www.behance.net/tanjibasif", label: "Behance", footerOnly: true },
     { icon: WhatsAppIcon, href: "https://wa.me/+8801815782269", label: "WhatsApp" },
     { icon: TelegramIcon, href: "https://t.me/taasif20", label: "Telegram" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/tanjib-ahmed/", label: "LinkedIn" },
     { icon: Mail, href: "tanjib.tanjib204@gmail.com", label: "Email", excludeFromFooter: true },
 ];

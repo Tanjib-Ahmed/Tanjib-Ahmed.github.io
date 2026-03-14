@@ -50,15 +50,17 @@ export const Experience = () => {
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-6"
+                    className="mb-16 md:mb-24 flex flex-col items-center text-center gap-6"
                 >
-                    <h2 className="text-4xl md:text-6xl lg:text-[70px] font-display font-black tracking-tight text-white leading-none">
-                        Designed with<br />
-                        <span className="text-primary italic">Purpose.</span>
-                    </h2>
-                    <p className="text-muted-foreground max-w-sm text-lg md:mb-2">
-                        My journey of learning how to build and design.
-                    </p>
+                    <div className="space-y-4">
+                        <h2 className="text-4xl md:text-6xl lg:text-[70px] font-display font-black tracking-tight text-white leading-none">
+                            Designed with<br />
+                            <span className="text-primary italic">Purpose.</span>
+                        </h2>
+                        <p className="text-muted-foreground max-w-sm mx-auto text-lg md:mb-2">
+                            My journey of learning how to build and design.
+                        </p>
+                    </div>
                 </motion.div>
 
                 <Tabs defaultValue="about" className="w-full">
