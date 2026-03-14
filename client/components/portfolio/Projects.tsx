@@ -19,76 +19,62 @@ const CarouselRow = ({
   direction = "left",
   speed,
   aspectRatio = 16 / 10,
-  skewClass = "-rotate-3"
 }: {
   title: string,
   items: string[],
   direction?: "left" | "right",
   speed?: string,
   aspectRatio?: number | "mixed",
-  skewClass?: string
 }) => {
   if (items.length === 0) return null;
-  // Duplicate items for seamless infinite scroll
-  const duplicatedItems = [...items, ...items, ...items, ...items]; // Quadruple to ensure enough content for smooth scroll
-
-  // Calculate duration dynamically if speed is not provided
-  // Factor of 15s per original item ensures constant scanning speed regardless of count
+  const duplicatedItems = [...items, ...items, ...items, ...items];
   const duration = speed || `${Math.max(items.length * 15, 60)}s`;
 
-  // Adjust margin based on rotation to prevent gaps or crowding
-  // -3deg (Logos, Socials) needs less space (mb-8)
-  // +3deg (Thumbnails) needs more space (mb-24) to avoid hitting the title
-  const titleMargin = (title === "Logo Designs" || title === "Social Media Designs") ? "mb-8" : "mb-24";
-
   return (
-    <div className="py-24 overflow-hidden relative group/section hover:z-50 transition-all duration-300"> {/* Increased padding and added z-index management */}
-      <div className={`container mx-auto px-6 ${titleMargin} text-left relative z-10`}> {/* Conditional margin */}
-        <h3 className={`text-3xl font-display font-black text-primary/80 tracking-tighter uppercase italic origin-left ${skewClass}`}>
+    <div className="py-24 overflow-hidden relative group/section transition-all duration-300">
+      <div className="container mx-auto px-6 mb-16 text-left relative z-10">
+        <h3 className="text-3xl md:text-4xl font-display font-black text-primary italic uppercase tracking-tighter">
           {title}
         </h3>
       </div>
 
-      <div className={`relative ${skewClass} scale-110 py-10 my-[-20px]`}>
+      <div className="relative rotate-0 scale-100 py-10 my-[-20px]">
         <div className="flex relative mb-4 group/row hover:z-40">
           <div
-            className={`flex animate-infinite-scroll group-hover/row:pause-scroll will-change-transform gap-0 ${direction === "right" ? 'direction-reverse' : ''}`}
+            className={`flex animate-infinite-scroll group-hover/row:pause-scroll will-change-transform gap-4 ${direction === "right" ? 'direction-reverse' : ''}`}
             style={{
               animationDuration: duration,
               animationDirection: direction === "right" ? "reverse" : "normal"
             }}
           >
             {duplicatedItems.map((item, index) => {
-              // Logic for mixed ratios in Social Media (alternating 1:1 and 4:5)
-              const currentRatio = title === "Social Media Designs"
+              const currentRatio = title === "Social Media Posts"
                 ? (index % 2 === 0 ? 1 : 4 / 5)
                 : (typeof aspectRatio === "number" ? aspectRatio : 16 / 10);
 
-              // Adjust container width based on ratio to maintain consistent height (Mobile h-48 = 192px, Desktop h-80 = 320px)
               const isThumbnail = title === "Thumbnails";
               const widthClass = title === "Logos"
                 ? "w-48 md:w-80"
                 : isThumbnail
-                  ? "w-auto" // Width calculated via aspect-ratio style
+                  ? "w-[300px] md:w-[500px]"
                   : currentRatio === 1
-                    ? "w-48 md:w-[350px]" // Square
-                    : "w-[153px] md:w-[280px]"; // Portrait 4:5
+                    ? "w-48 md:w-[350px]"
+                    : "w-[153px] md:w-[280px]";
 
               return (
                 <div
                   key={`${title}-${index}`}
-                  className={`${widthClass} flex-shrink-0 relative group/item transition-all duration-500 z-0 p-2 [perspective:1000px] h-48 md:h-80`}
-                  style={isThumbnail ? { aspectRatio: "16/9" } : undefined}
+                  className={`${widthClass} flex-shrink-0 relative group/item transition-all duration-500 z-0 h-48 md:h-80`}
                 >
-                  <div className={`overflow-hidden transition-all duration-500 rounded-3xl border border-white/10 relative h-full w-full bg-[#1A1A1A] group-hover/item:[transform:rotateX(5deg)_rotateY(-5deg)_scale(1.02)] shadow-xl group-hover/item:shadow-primary/20`}>
+                  {/* Image Container - Clean look for main rows */}
+                  <div className="absolute inset-0 overflow-hidden transition-all duration-700 rounded-[2.5rem] border border-white/5 bg-[#0D0D0D] group-hover/item:scale-[0.98]">
                     <img
                       src={item}
                       alt={`${title} project`}
-                      className="object-cover w-full h-full transition-all duration-500 group-hover/item:scale-110"
+                      className="object-cover w-full h-full transition-all duration-700 group-hover/item:scale-110"
                       loading="lazy"
                       decoding="async"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </div>
                 </div>
               );
@@ -97,9 +83,9 @@ const CarouselRow = ({
         </div>
       </div>
 
-      {/* Gradient Masks */}
-      <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+      {/* Fog Masks */}
+      <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-background via-background/80 to-transparent z-10 pointer-events-none" />
     </div>
   );
 };
@@ -111,26 +97,25 @@ export const Projects = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl sm:text-5xl md:text-8xl font-display font-black mb-6 tracking-tighter uppercase italic bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent pb-2">
+          <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-[110px] font-display font-black mb-6 tracking-tighter uppercase italic bg-gradient-to-br from-violet-400 via-primary to-purple-600 bg-clip-text text-transparent pb-2">
             Some of My Work
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-white/30 max-w-2xl mx-auto leading-relaxed font-medium">
             Here are some designs I have made for different projects over the years.
           </p>
         </motion.div>
       </div>
 
-      <div className="space-y-12">
+      <div className="space-y-4">
         {logoList.length > 0 && (
           <CarouselRow
             title="Logos"
             items={logoList}
             direction="left"
             aspectRatio={1}
-            skewClass="-rotate-3"
           />
         )}
         {thumbnailList.length > 0 && (
@@ -139,7 +124,6 @@ export const Projects = () => {
             items={thumbnailList}
             direction="right"
             aspectRatio={16 / 9}
-            skewClass="rotate-3"
           />
         )}
         {socialList.length > 0 && (
@@ -148,7 +132,6 @@ export const Projects = () => {
             items={socialList}
             direction="left"
             aspectRatio={4 / 5}
-            skewClass="-rotate-3"
           />
         )}
         <OtherDesigns items={otherList} />

@@ -24,56 +24,59 @@ export const OtherDesigns = ({ items }: { items: string[] }) => {
     }, [items]);
 
     return (
-        <div className="py-24 overflow-hidden relative group/section hover:z-50 transition-all duration-300"> {/* Increased padding and added z-index management */}
-            <div className="container mx-auto px-6 mb-24 text-left relative z-10"> {/* Increased margin */}
-                <h3 className="text-3xl font-display font-black text-primary/80 tracking-tighter uppercase italic origin-left rotate-3">
-                    Other Designs
+        <div className="py-32 overflow-hidden relative group/section transition-all duration-300">
+            <div className="container mx-auto px-6 mb-16 text-left relative z-10">
+                <h3 className="text-3xl md:text-4xl font-display font-black text-primary italic uppercase tracking-tighter">
+                    Explorations & More
                 </h3>
             </div>
 
-            {/* Skewed Container */}
+            {/* Straightened Container */}
             <div
-                className="relative rotate-3 scale-110 -my-10 py-20" // Rotated +3deg (Right-Down)
+                className="relative rotate-0 scale-100 -my-8 py-10"
             >
                 {rows.map((rowItems, rowIndex) => (
                     <div
                         key={`grid-row-${rowIndex}`}
-                        className="flex relative mb-0 group/row hover:z-40" // Removed bottom margin for tight tape look
+                        className="flex relative mb-4 group/row hover:z-40"
                     >
                         <div
-                            className={`flex animate-infinite-scroll group-hover/row:pause-scroll will-change-transform gap-0 ${rowIndex % 2 === 0 ? 'direction-reverse' : ''}`} // Start with Reverse (RTL) for zigzag flow
+                            className={`flex animate-infinite-scroll group-hover/row:pause-scroll will-change-transform gap-4 ${rowIndex % 2 === 0 ? 'direction-reverse' : ''}`}
                             style={{
-                                // Standardized speed: rowItems.length * 15s (Minimum 60s)
-                                animationDuration: `${Math.max(rowItems.length * 15, 60)}s`,
+                                animationDuration: `${Math.max(rowItems.length * 12, 45)}s`,
                                 animationDirection: rowIndex % 2 === 0 ? 'reverse' : 'normal'
                             }}
                         >
                             {[...rowItems, ...rowItems, ...rowItems].map((item, index) => {
-                                // Variable width to simulate mixed aspect ratio distribution and fill space natively
-                                const widthClass = index % 3 === 0 ? "w-72 md:w-[450px]" : index % 2 === 0 ? "w-72 md:w-[350px]" : "w-72 md:w-80";
+                                // More varied widths for a denser masonry look
+                                const widths = ["w-64", "w-80", "w-96", "w-[400px]", "w-[300px]"];
+                                const widthClass = widths[index % widths.length];
 
                                 return (
                                     <div
                                         key={`grid-item-${rowIndex}-${index}`}
-                                        className={`${widthClass} relative group/item transition-all duration-500 cursor-zoom-in flex-shrink-0 z-0 hover:z-50 p-2 h-64 md:h-80`}
+                                        className={`${widthClass} relative group/item transition-all duration-500 cursor-zoom-in flex-shrink-0 z-0 hover:z-50 h-56 md:h-72`}
                                     >
-                                        {/* Base Grid Image (Cropped) */}
-                                        <div className="absolute inset-2 overflow-hidden transition-all duration-500 rounded-3xl border border-white/5 bg-[#1A1A1A] group-hover/item:opacity-0 group-hover/item:scale-95">
+                                        {/* Image Container with Fog/Hazy Border Effect */}
+                                        <div className="absolute inset-0 overflow-hidden transition-all duration-700 rounded-[2rem] border border-white/5 bg-[#0D0D0D] group-hover/item:scale-[0.98]">
                                             <img
                                                 src={item}
                                                 alt={`Other design base ${rowIndex}-${index}`}
-                                                className="h-full w-full object-cover grayscale opacity-70 transition-all duration-500"
+                                                className="h-full w-full object-cover grayscale opacity-40 transition-all duration-700 group-hover/item:scale-110 group-hover/item:opacity-60"
                                                 loading="lazy"
                                                 decoding="async"
                                             />
+                                            {/* Foggy Border (Vignette) Overlay */}
+                                            <div className="absolute inset-0 pointer-events-none transition-opacity duration-500 shadow-[inset_0_0_60px_rgba(0,0,0,0.9),inset_0_0_20px_rgba(0,0,0,0.8)]" />
+                                            <div className="absolute inset-0 pointer-events-none opacity-40 group-hover/item:opacity-20 transition-opacity bg-gradient-to-t from-black/80 via-transparent to-black/80" />
                                         </div>
 
-                                        {/* Hover Popout Image (Full Native Aspect Ratio) */}
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex items-center justify-center opacity-0 scale-75 group-hover/item:opacity-100 group-hover/item:scale-105 transition-all duration-500 pointer-events-none">
+                                        {/* Hover Popout Image (Hanzo Influence) */}
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex items-center justify-center opacity-0 scale-90 group-hover/item:opacity-100 group-hover/item:scale-100 transition-all duration-500 pointer-events-none">
                                             <img
                                                 src={item}
                                                 alt={`Other design full ${rowIndex}-${index}`}
-                                                className="w-auto h-auto min-w-[250px] max-w-[90vw] max-h-[300px] md:max-h-[400px] object-contain rounded-2xl drop-shadow-[0_0_50px_rgba(139,92,246,0.6)]"
+                                                className="w-auto h-auto min-w-[200px] max-w-[85vw] max-h-[250px] md:max-h-[350px] object-contain rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-white/10"
                                                 loading="lazy"
                                                 decoding="async"
                                             />
@@ -86,9 +89,9 @@ export const OtherDesigns = ({ items }: { items: string[] }) => {
                 ))}
             </div>
 
-            {/* Gradient Masks to fade edges smoothly */}
-            <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            {/* Fog Masks for Section Edges */}
+            <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-background via-background/80 to-transparent z-10 pointer-events-none" />
         </div>
     );
 };
