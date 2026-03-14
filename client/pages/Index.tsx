@@ -8,14 +8,17 @@ import { Testimonials } from "@/components/portfolio/Testimonials";
 import { FAQ } from "@/components/portfolio/FAQ";
 import { Footer } from "@/components/portfolio/Footer";
 import { ScrollToTop } from "@/components/portfolio/ScrollToTop";
+import { useState } from "react";
 
 export default function Index() {
+  const [isHeaderFinished, setIsHeaderFinished] = useState(false);
+
   return (
     <div className="dark min-h-screen bg-background text-foreground">
-      <Navbar />
+      <Navbar isHeaderFinished={isHeaderFinished} />
       <div className="transition-all duration-300 overflow-x-hidden">
         <main>
-          <Hero />
+          <Hero isHeaderFinished={isHeaderFinished} setIsHeaderFinished={setIsHeaderFinished} />
           <Projects />
           <Services />
           <Testimonials />
