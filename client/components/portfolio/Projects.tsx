@@ -33,7 +33,7 @@ const CarouselRow = ({
   return (
     <div className="py-24 overflow-hidden relative group/section transition-all duration-300">
       <div className="container mx-auto px-6 mb-16 text-left relative z-10">
-        <h3 className="text-3xl md:text-4xl font-display font-black text-primary italic uppercase tracking-tighter">
+        <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display font-black text-primary italic uppercase tracking-tighter">
           {title}
         </h3>
       </div>
@@ -54,17 +54,17 @@ const CarouselRow = ({
 
               const isThumbnail = title === "Thumbnails";
               const widthClass = title === "Logos"
-                ? "w-48 md:w-80"
+                ? "w-36 sm:w-48 md:w-80"
                 : isThumbnail
-                  ? "w-[300px] md:w-[500px]"
+                  ? "w-[250px] sm:w-[350px] md:w-[500px]"
                   : currentRatio === 1
-                    ? "w-48 md:w-[350px]"
-                    : "w-[153px] md:w-[280px]";
+                    ? "w-36 sm:w-48 md:w-[350px]"
+                    : "w-[120px] sm:w-[153px] md:w-[280px]";
 
               return (
                 <div
                   key={`${title}-${index}`}
-                  className={`${widthClass} flex-shrink-0 relative group/item transition-all duration-500 z-0 h-48 md:h-80`}
+                  className={`${widthClass} flex-shrink-0 relative group/item transition-all duration-500 z-0 h-36 sm:h-48 md:h-80`}
                 >
                   {/* Image Container - Clean look for main rows */}
                   <div className="absolute inset-0 overflow-hidden transition-all duration-700 rounded-[2.5rem] border border-white/5 bg-[#0D0D0D] group-hover/item:scale-[0.98]">
@@ -100,7 +100,7 @@ export const Projects = () => {
           transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-[110px] font-display font-black mb-6 tracking-tighter uppercase italic bg-gradient-to-br from-violet-400 via-primary to-purple-600 bg-clip-text text-transparent pb-2">
+          <h2 className="text-3xl sm:text-5xl md:text-8xl lg:text-[110px] font-display font-black mb-6 tracking-tighter uppercase italic bg-gradient-to-br from-violet-400 via-primary to-purple-600 bg-clip-text text-transparent pb-2 leading-tight">
             Some of My Work
           </h2>
           <p className="text-xl text-white/30 max-w-2xl mx-auto leading-relaxed font-medium">

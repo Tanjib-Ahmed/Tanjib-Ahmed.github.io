@@ -39,8 +39,8 @@ export const Services = () => {
     <section id="services" className="py-24 px-6 relative">
       <div className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left -z-10" />
       <div className="container mx-auto">
-        <div className="max-w-2xl mb-20">
-          <h2 className="text-4xl md:text-6xl font-display font-extrabold mb-6 bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent pb-2">What I Can Do</h2>
+        <div className="max-w-2xl mb-12 md:mb-20">
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-extrabold mb-6 bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent pb-2 leading-tight">What I Can Do</h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
             I solve problems and make cool things using Adobe tools.
           </p>

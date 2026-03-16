@@ -113,7 +113,7 @@ export const Hero = ({
   };
 
   return (
-    <section className="relative pt-40 pb-32 md:pt-56 md:pb-48 px-6 min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#0A0A0A]">
+    <section className="relative pt-32 pb-24 md:pt-56 md:pb-48 px-6 min-h-[90vh] flex flex-col items-center justify-center text-center overflow-hidden bg-[#0A0A0A]">
       {/* Background Lighting */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden z-0">
         <div className="absolute top-[-5%] left-[-5%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[140px] mix-blend-screen opacity-70" />
@@ -207,7 +207,7 @@ export const Hero = ({
             variants={itemVariants}
             initial="hidden"
             animate={isHeaderFinished ? "visible" : "hidden"}
-            className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[13px] mb-8 text-white/50 backdrop-blur-md shadow-sm font-medium tracking-tight"
+            className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[11px] sm:text-[13px] mb-8 text-white/50 backdrop-blur-md shadow-sm font-medium tracking-tight"
           >
             <Sparkles className="w-3.5 h-3.5 text-primary" />
             Booking Open - Available for new projects
@@ -218,7 +218,7 @@ export const Hero = ({
             initial="hidden"
             animate="visible"
             onAnimationComplete={() => setIsHeaderFinished(true)}
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-[110px] font-display font-black leading-[1] mb-8 tracking-[-0.04em] text-white"
+            className="text-4xl sm:text-6xl md:text-8xl lg:text-[110px] font-display font-black leading-[1.1] sm:leading-[1] mb-8 tracking-[-0.04em] text-white break-words"
           >
             <TypewriterText text="Unlimited " />
             <TypewriterText text="Design" className="text-white/30 italic font-light" />

@@ -53,7 +53,7 @@ export const Experience = () => {
                     className="mb-16 md:mb-24 flex flex-col items-center text-center gap-6"
                 >
                     <div className="space-y-4">
-                        <h2 className="text-4xl md:text-6xl lg:text-[70px] font-display font-black tracking-tight text-white leading-none">
+                        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-[70px] font-display font-black tracking-tight text-white leading-tight">
                             Designed with<br />
                             <span className="text-primary italic">Purpose.</span>
                         </h2>
@@ -111,7 +111,7 @@ export const Experience = () => {
                                 transition={{ duration: 0.5, delay: 0.2 }}
                                 className="md:col-span-7 space-y-8 relative z-10"
                             >
-                                <h3 className="text-3xl lg:text-5xl font-display font-bold text-white leading-tight">
+                                <h3 className="text-2xl sm:text-3xl lg:text-5xl font-display font-bold text-white leading-tight">
                                     Making Cool Ideas <span className="text-transparent text-stroke group-hover:text-primary transition-colors duration-500">Real.</span>
                                 </h3>
                                 <p className="text-lg text-white/60 leading-relaxed font-light">

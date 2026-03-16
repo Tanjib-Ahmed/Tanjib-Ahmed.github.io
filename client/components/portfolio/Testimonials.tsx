@@ -15,7 +15,7 @@ export const Testimonials = () => {
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
 
       <div className="container mx-auto relative z-10 px-6">
-        <h2 className="text-4xl md:text-7xl font-display font-black mb-20 text-center tracking-tighter bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent underline decoration-primary/20 underline-offset-8">
+        <h2 className="text-3xl sm:text-5xl md:text-7xl font-display font-black mb-12 md:mb-20 text-center tracking-tighter bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent underline decoration-primary/20 underline-offset-8 leading-tight">
           WHAT PEOPLE SAY
         </h2>
       </div>

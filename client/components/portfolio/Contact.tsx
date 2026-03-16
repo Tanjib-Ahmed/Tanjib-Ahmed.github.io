@@ -81,7 +81,7 @@ END:VCARD`;
             >
               <div className="relative z-10 space-y-8 w-full">
                 <div className="space-y-4">
-                  <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-black tracking-tighter text-white leading-tight">
+                  <h2 className="text-3xl sm:text-5xl lg:text-7xl font-display font-black tracking-tighter text-white leading-tight">
                     Let's <span className="text-primary italic">Talk.</span>
                   </h2>
                   <p className="text-lg md:text-xl text-white/50 max-w-lg mx-auto leading-relaxed font-medium">
@@ -91,8 +91,8 @@ END:VCARD`;
 
                 <div className="space-y-6 pt-4">
                   <div className="space-y-2">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/20">Email Address</p>
-                    <p className="text-2xl md:text-3xl font-bold text-white tracking-tight break-all">tanjib.tanjib204@gmail.com</p>
+                    <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/20">Email Address</p>
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-tight break-all">tanjib.tanjib204@gmail.com</p>
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mx-auto">
@@ -133,8 +133,8 @@ END:VCARD`;
                   </svg>
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-2xl md:text-3xl lg:text-4xl font-black text-white italic tracking-tight uppercase">Professional Networking</h4>
-                  <p className="text-white/40 font-bold uppercase tracking-widest text-sm">Grow your network with me</p>
+                  <h4 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white italic tracking-tight uppercase">Professional Networking</h4>
+                  <p className="text-white/40 font-bold uppercase tracking-widest text-[10px] sm:text-sm">Grow your network with me</p>
                 </div>
                 <ArrowRight className="w-8 h-8 text-white/20 group-hover:text-white group-hover:translate-x-2 transition-all" />
               </div>
