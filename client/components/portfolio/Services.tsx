@@ -36,12 +36,14 @@ const skills = [
 
 export const Services = () => {
   return (
-    <section id="services" className="py-24 px-6 relative">
-      <div className="absolute inset-0 bg-primary/5 -skew-y-3 transform origin-top-left -z-10" />
+    <section id="services" className="py-24 px-6 relative bg-background">
       <div className="container mx-auto">
-        <div className="max-w-2xl mb-12 md:mb-20">
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-extrabold mb-6 bg-gradient-to-br from-violet-300 via-primary to-purple-400 bg-clip-text text-transparent pb-2 leading-tight">What I Can Do</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+        {/* Orange gradient banner */}
+        <div className="orange-gradient rounded-3xl p-8 mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white">
+            My <span className="font-script">Services</span>
+          </h2>
+          <p className="text-white/70 font-sans text-base md:text-lg mt-3 max-w-xl">
             I solve problems and make cool things using Adobe tools.
           </p>
         </div>
@@ -54,13 +56,13 @@ export const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group p-8 glass-card rounded-[2rem] hover:-translate-y-2"
+              className="group p-8 rounded-2xl bg-card border border-white/5 hover:border-primary/50 transition-all duration-300"
             >
-              <div className="mb-6 w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white group-hover:scale-110 transition-all duration-500">
+              <div className="mb-6 w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500">
                 {skill.icon}
               </div>
-              <h3 className="text-2xl font-display font-bold mb-3 group-hover:text-primary transition-colors">{skill.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">
+              <h3 className="text-lg font-display font-bold text-white mb-3 group-hover:text-primary transition-colors">{skill.title}</h3>
+              <p className="text-white/60 leading-relaxed text-sm font-sans">
                 {skill.description}
               </p>
             </motion.div>

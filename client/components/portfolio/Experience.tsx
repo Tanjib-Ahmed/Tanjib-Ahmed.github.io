@@ -42,7 +42,7 @@ export const Experience = () => {
     };
 
     return (
-        <section id="about" className="py-24 md:py-32 px-6 relative bg-background overflow-hidden min-h-screen flex flex-col justify-center">
+        <section id="about" className="py-24 md:py-32 px-6 relative bg-background overflow-hidden min-h-screen flex flex-col justify-center border-t border-white/5">
             <div className="container mx-auto max-w-6xl">
 
                 {/* --- HEADER TITLE --- */}
@@ -53,11 +53,11 @@ export const Experience = () => {
                     className="mb-16 md:mb-24 flex flex-col items-center text-center gap-6"
                 >
                     <div className="space-y-4">
-                        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-[70px] font-display font-black tracking-tight text-white leading-tight">
+                        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-[60px] font-display font-bold text-white leading-tight">
                             Designed with<br />
-                            <span className="text-primary italic">Purpose.</span>
+                            <span className="font-script text-primary">Purpose.</span>
                         </h2>
-                        <p className="text-muted-foreground max-w-sm mx-auto text-lg md:mb-2">
+                        <p className="text-white/50 max-w-sm mx-auto text-lg md:mb-2 font-sans font-light">
                             My journey of learning how to build and design.
                         </p>
                     </div>
@@ -67,19 +67,16 @@ export const Experience = () => {
 
                     {/* --- TABS NAVIGATION --- */}
                     <div className="flex justify-start md:justify-center mb-16 overflow-x-auto pb-4 hide-scrollbar">
-                        <TabsList className="bg-[#1A1A1A] border border-white/10 p-1.5 rounded-full h-auto inline-flex shadow-xl">
-                            <TabTrigger value="about" icon={<User className="w-4 h-4" />}>About Me</TabTrigger>
-                            <TabTrigger value="employment" icon={<Briefcase className="w-4 h-4" />}>Employment</TabTrigger>
-                            <TabTrigger value="education" icon={<GraduationCap className="w-4 h-4" />}>Education</TabTrigger>
+                        <TabsList className="bg-card rounded-full border border-white/5 p-1 h-auto flex justify-center items-center gap-0">
+                            <TabTrigger value="about">About Me</TabTrigger>
+                            <TabTrigger value="employment">Employment</TabTrigger>
+                            <TabTrigger value="education">Education</TabTrigger>
                         </TabsList>
                     </div>
 
                     {/* --- TAB: ABOUT ME --- */}
                     <TabsContent value="about" className="outline-none focus:outline-none mt-0">
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center bg-[#1A1A1A] border border-white/5 rounded-[40px] p-8 md:p-12 relative overflow-hidden group hover:border-white/10 transition-colors duration-500">
-
-                            {/* Subtle background glow */}
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
+                        <div className="grid grid-cols-1 md:col-span-12 md:grid-cols-12 gap-12 items-center bg-card border border-white/5 rounded-3xl p-8 md:p-12 relative overflow-hidden group hover:border-primary/20 transition-all duration-500">
 
                             {/* Image - Spans 5 columns */}
                             <motion.div
@@ -88,15 +85,14 @@ export const Experience = () => {
                                 transition={{ duration: 0.5 }}
                                 className="md:col-span-5 relative"
                             >
-                                <div className="aspect-[4/5] bg-background rounded-3xl overflow-hidden border border-white/10 relative">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 opacity-60" />
+                                <div className="aspect-[4/5] bg-background rounded-2xl overflow-hidden relative">
                                     <img
                                         src={aboutImage as string}
                                         alt="Portrait"
-                                        className="object-cover w-full h-full grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 hover:scale-105"
+                                        className="object-cover w-full h-full grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 hover:scale-105"
                                     />
                                     <div className="absolute bottom-6 left-6 z-20">
-                                        <div className="flex items-center text-primary font-medium bg-black/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 text-sm">
+                                        <div className="flex items-center text-primary font-medium bg-primary/10 backdrop-blur-md px-4 py-2 rounded-full text-xs">
                                             <MapPin className="w-4 h-4 mr-2" />
                                             Dhaka, Bangladesh
                                         </div>
@@ -111,18 +107,18 @@ export const Experience = () => {
                                 transition={{ duration: 0.5, delay: 0.2 }}
                                 className="md:col-span-7 space-y-8 relative z-10"
                             >
-                                <h3 className="text-2xl sm:text-3xl lg:text-5xl font-display font-bold text-white leading-tight">
-                                    Making Cool Ideas <span className="text-transparent text-stroke group-hover:text-primary transition-colors duration-500">Real.</span>
+                                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white leading-tight">
+                                    Making Cool Ideas <span className="font-script text-primary">Real.</span>
                                 </h3>
-                                <p className="text-lg text-white/60 leading-relaxed font-light">
+                                <p className="text-base text-white/60 leading-relaxed font-sans font-light">
                                     I am Tanjib Ahmed. I have been a graphic designer for four years. I make designs that help your brand look great and stand out.
                                 </p>
-                                <p className="text-lg text-white/60 leading-relaxed font-light">
+                                <p className="text-base text-white/60 leading-relaxed font-sans font-light">
                                     I study Computer Science. This helps me mix exact math with fun art. My work looks good and tells a clear story.
                                 </p>
 
                                 <div className="pt-6 flex flex-wrap items-center gap-4">
-                                    <Button asChild size="lg" className="rounded-full px-8 py-6 bg-white text-black hover:bg-white/90 transition-all text-base font-bold shadow-lg shadow-white/10 cursor-pointer">
+                                    <Button asChild size="lg" className="rounded-full px-6 py-5 bg-primary text-white hover:bg-primary/90 transition-all text-sm font-semibold cursor-pointer border border-primary">
                                         <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer">
                                             <Download className="mr-2 w-5 h-5" />
                                             Download Resume
@@ -137,7 +133,7 @@ export const Experience = () => {
                                                 target={link.label === "Email" ? undefined : "_blank"}
                                                 rel={link.label === "Email" ? undefined : "noopener noreferrer"}
                                                 onClick={(e) => handleSocialClick(e, link)}
-                                                className="w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center rounded-full text-white/70 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+                                                className="w-11 h-11 bg-white/5 border border-white/10 flex items-center justify-center rounded-full text-white/60 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
                                             >
                                                 <link.icon className="w-5 h-5" />
                                             </a>
@@ -232,12 +228,11 @@ export const Experience = () => {
     );
 };
 
-const TabTrigger = ({ value, children, icon }: { value: string, children: React.ReactNode, icon: React.ReactNode }) => (
+const TabTrigger = ({ value, children }: { value: string, children: React.ReactNode }) => (
     <TabsTrigger
         value={value}
-        className="rounded-full px-6 py-3 text-sm flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-primary data-[state=active]:text-white font-medium text-white/50 hover:text-white"
+        className="bg-transparent rounded-full px-6 py-3 text-sm font-semibold text-white/50 data-[state=active]:bg-primary data-[state=active]:text-white transition-all duration-300"
     >
-        {icon}
         {children}
     </TabsTrigger>
 );
@@ -256,27 +251,28 @@ const ExperienceItem = ({ title, subtitle, period, location, description, index 
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-            className={`p-8 rounded-[30px] border transition-all duration-500 overflow-hidden relative group hover:-translate-y-1 ${isActive ? "bg-[#1A1A1A] border-primary/30 shadow-[0_0_30px_rgba(124,58,237,0.05)]" : "bg-[#1A1A1A] border-white/5 hover:border-white/10"}`}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.05, duration: 0.5 }}
+            viewport={{ once: true }}
+            className={`p-8 rounded-2xl border transition-all duration-300 relative group ${isActive ? "bg-card border-primary/40" : "bg-card border-white/5 hover:border-primary/30"}`}
         >
             {isActive && (
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-[50px] pointer-events-none" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[50px] pointer-events-none" />
             )}
 
-            <div className="relative z-10 flex flex-col h-full">
+            <div className="relative z-10 flex flex-col h-full font-sans">
                 <div className="flex justify-between items-start gap-4 mb-4">
-                    <h3 className={`text-xl md:text-2xl font-display font-bold ${isActive ? "text-white" : "text-white group-hover:text-primary transition-colors"}`}>
+                    <h3 className="text-xl md:text-2xl font-display font-bold text-white group-hover:text-primary transition-colors">
                         {subtitle}
                     </h3>
-                    <span className={`text-[10px] md:text-xs font-mono px-3 py-1.5 rounded-full uppercase tracking-widest shrink-0 ${isActive ? "bg-primary text-white" : "bg-white/5 text-white/50 border border-white/5"}`}>
+                    <span className={`text-xs font-sans font-semibold px-3 py-1.5 rounded-full shrink-0 ${isActive ? "bg-primary text-white" : "bg-primary/10 text-primary"}`}>
                         {period}
                     </span>
                 </div>
 
                 <div className="mb-6 flex-grow">
-                    <h4 className="text-lg text-white/80 font-medium mb-1">{title}</h4>
+                    <h4 className="text-lg text-white/80 font-display font-bold mb-1">{title}</h4>
                     <div className="flex items-center gap-1.5 text-sm text-primary/80 mb-3">
                         <MapPin className="w-3.5 h-3.5" />
                         {location}
@@ -284,9 +280,9 @@ const ExperienceItem = ({ title, subtitle, period, location, description, index 
                 </div>
 
                 {description && (
-                    <div className="pt-4 border-t border-white/10">
+                    <div className="pt-4 border-t border-white/5">
                         {description.map((line, i) => (
-                            <p key={i} className="text-sm text-white/50 leading-relaxed font-light">
+                            <p key={i} className="text-sm text-white/50 leading-relaxed font-light font-sans">
                                 {line}
                             </p>
                         ))}

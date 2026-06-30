@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Eye } from "lucide-react";
 import { OtherDesigns } from "./OtherDesigns";
 
 // Dynamic asset loading
@@ -13,79 +13,102 @@ const thumbnailList = Object.values(thumbnailImages) as string[];
 const socialList = Object.values(socialImages) as string[];
 const otherList = Object.values(otherImages) as string[];
 
-const CarouselRow = ({
+const getCategoryMetadata = (title: string) => {
+  switch (title) {
+    case "Logos":
+      return { num: "01", tag: "BRAND IDENTITY", label: "Logos & Brandmarks" };
+    case "Thumbnails":
+      return { num: "02", tag: "DIGITAL MEDIA", label: "Video Thumbnails" };
+    case "Social Media Posts":
+      return { num: "03", tag: "SOCIAL MARKETING", label: "Social Media Campaigns" };
+    default:
+      return { num: "04", tag: "CREATIVE WORK", label: "Explorations & Personal Works" };
+  }
+};
+
+const ProjectRow = ({
   title,
   items,
-  direction = "left",
-  speed,
   aspectRatio = 16 / 10,
 }: {
   title: string,
   items: string[],
-  direction?: "left" | "right",
-  speed?: string,
   aspectRatio?: number | "mixed",
 }) => {
   if (items.length === 0) return null;
-  const duplicatedItems = [...items, ...items, ...items, ...items];
-  const duration = speed || `${Math.max(items.length * 15, 60)}s`;
+
+  const maxItemsToShow = title === "Logos" ? 8 : 6;
+  const itemsToShow = items.slice(0, maxItemsToShow);
+  const meta = getCategoryMetadata(title);
+
+  const gridColsClass = title === "Logos" 
+    ? "grid-cols-2 md:grid-cols-4" 
+    : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <div className="py-24 overflow-hidden relative group/section transition-all duration-300">
-      <div className="container mx-auto px-6 mb-16 text-left relative z-10">
-        <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display font-black text-primary italic uppercase tracking-tighter">
-          {title}
-        </h3>
-      </div>
-
-      <div className="relative rotate-0 scale-100 py-10 my-[-20px]">
-        <div className="flex relative mb-4 group/row hover:z-40">
-          <div
-            className={`flex animate-infinite-scroll group-hover/row:pause-scroll will-change-transform gap-4 ${direction === "right" ? 'direction-reverse' : ''}`}
-            style={{
-              animationDuration: duration,
-              animationDirection: direction === "right" ? "reverse" : "normal"
-            }}
-          >
-            {duplicatedItems.map((item, index) => {
-              const currentRatio = title === "Social Media Posts"
-                ? (index % 2 === 0 ? 1 : 4 / 5)
-                : (typeof aspectRatio === "number" ? aspectRatio : 16 / 10);
-
-              const isThumbnail = title === "Thumbnails";
-              const widthClass = title === "Logos"
-                ? "w-36 sm:w-48 md:w-80"
-                : isThumbnail
-                  ? "w-[250px] sm:w-[350px] md:w-[500px]"
-                  : currentRatio === 1
-                    ? "w-36 sm:w-48 md:w-[350px]"
-                    : "w-[120px] sm:w-[153px] md:w-[280px]";
-
-              return (
-                <div
-                  key={`${title}-${index}`}
-                  className={`${widthClass} flex-shrink-0 relative group/item transition-all duration-500 z-0 h-36 sm:h-48 md:h-80`}
-                >
-                  {/* Image Container - Clean look for main rows */}
-                  <div className="absolute inset-0 overflow-hidden transition-all duration-700 rounded-[2.5rem] border border-white/5 bg-[#0D0D0D] group-hover/item:scale-[0.98]">
-                    <img
-                      src={item}
-                      alt={`${title} project`}
-                      className="object-cover w-full h-full transition-all duration-700 group-hover/item:scale-110"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-              );
-            })}
+    <div className="py-20 border-b border-white/5 relative">
+      {/* Category Heading with Elegant Typography */}
+      <div className="container mx-auto px-6 mb-12 text-left">
+        <div className="flex flex-col gap-1.5">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-mono tracking-[0.2em] text-primary font-bold uppercase">{meta.num} // {meta.tag}</span>
           </div>
+          <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white">
+            {meta.label}
+          </h3>
         </div>
       </div>
 
-      {/* Fog Masks */}
-      <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-background via-background/80 to-transparent z-10 pointer-events-none" />
+      {/* Projects Grid */}
+      <div className="container mx-auto px-6">
+        <div className={`grid gap-8 ${gridColsClass}`}>
+          {itemsToShow.map((item, index) => {
+            const currentRatio = title === "Social Media Posts"
+              ? (index % 2 === 0 ? 1 : 4 / 5)
+              : (typeof aspectRatio === "number" ? aspectRatio : 16 / 10);
+
+            const isLogo = title === "Logos";
+
+            return (
+              <motion.div
+                key={`${title}-${index}`}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                className="relative rounded-[24px] bg-card border border-white/5 p-4 transition-all duration-500 hover:border-primary/45 hover:shadow-[0_10px_40px_rgba(249,115,22,0.06)] hover:-translate-y-1.5 group flex flex-col justify-between"
+              >
+                <div 
+                  className={`rounded-2xl overflow-hidden relative border border-white/5 bg-background/50 flex items-center justify-center`}
+                  style={{ aspectRatio: typeof currentRatio === "number" ? currentRatio : undefined }}
+                >
+                  <img
+                    src={item}
+                    alt={`${title} project ${index + 1}`}
+                    className={`transition-all duration-700 ${
+                      isLogo 
+                        ? "max-w-[70%] max-h-[70%] object-contain p-6 group-hover:scale-[1.03]" 
+                        : "w-full h-full object-cover group-hover:scale-[1.03]"
+                    }`}
+                    loading="lazy"
+                  />
+                  {/* Subtle Glow Behind Logo */}
+                  {isLogo && (
+                    <div className="absolute inset-0 bg-radial-gradient from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  )}
+                  {/* Premium Action Hover Overlay */}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                    <span className="rounded-full bg-primary text-white text-xs font-bold px-5 py-2.5 flex items-center gap-1.5 shadow-lg transform translate-y-3 group-hover:translate-y-0 transition-all duration-300">
+                      View Project
+                      <Eye className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
@@ -93,51 +116,59 @@ const CarouselRow = ({
 export const Projects = () => {
   return (
     <section id="work" className="py-32 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-6 mb-24 text-center">
+      {/* Background ambient orbs matching hero */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-[30%] left-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
+        <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
+      </div>
+
+      <div className="container mx-auto px-6 mb-20 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
           viewport={{ once: true }}
+          className="flex flex-col items-center"
         >
-          <h2 className="text-3xl sm:text-5xl md:text-8xl lg:text-[110px] font-display font-black mb-6 tracking-tighter uppercase italic bg-gradient-to-br from-violet-400 via-primary to-purple-600 bg-clip-text text-transparent pb-2 leading-tight">
-            Some of My Work
+          <div className="flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs px-4 py-1.5 mb-6 font-semibold uppercase tracking-[0.1em]">
+            Selected Works
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-extrabold mb-6 text-white leading-tight max-w-3xl">
+            Let's have a look at my{" "}
+            <span className="font-script text-primary">Portfolio</span>
           </h2>
-          <p className="text-xl text-white/30 max-w-2xl mx-auto leading-relaxed font-medium">
-            Here are some designs I have made for different projects over the years.
+          <p className="text-base md:text-lg text-white/50 max-w-xl mx-auto leading-relaxed font-sans">
+            A curated showcase of design concepts, client branding, and digital media projects.
           </p>
         </motion.div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 relative z-10">
         {logoList.length > 0 && (
-          <CarouselRow
+          <ProjectRow
             title="Logos"
             items={logoList}
-            direction="left"
             aspectRatio={1}
           />
         )}
         {thumbnailList.length > 0 && (
-          <CarouselRow
+          <ProjectRow
             title="Thumbnails"
             items={thumbnailList}
-            direction="right"
             aspectRatio={16 / 9}
           />
         )}
         {socialList.length > 0 && (
-          <CarouselRow
+          <ProjectRow
             title="Social Media Posts"
             items={socialList}
-            direction="left"
             aspectRatio={4 / 5}
           />
         )}
         <OtherDesigns items={otherList} />
         {logoList.length === 0 && thumbnailList.length === 0 && socialList.length === 0 && otherList.length === 0 && (
-          <div className="text-center text-muted-foreground py-20">
-            <p>Add images to <code>client/assets/projects/</code> folders to see them here.</p>
+          <div className="text-center text-white/40 py-20">
+            <p>Add images to <code className="text-primary/70">client/assets/projects/</code> folders to see them here.</p>
           </div>
         )}
       </div>

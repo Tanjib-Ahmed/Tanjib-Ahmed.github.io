@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { siteConfig } from "@/data/config";
@@ -18,6 +18,9 @@ import figma3d from "@/assets/icons/3d/figma_3d.png";
 import ae3d from "@/assets/icons/3d/ae_3d.png";
 import pr3d from "@/assets/icons/3d/pr_3d.png";
 
+// Portrait photo
+import portraitPhoto from "@/assets/about/tanjib dp.jpg";
+
 // Tool SVGs
 const toolIcons = {
   photoshop: "/tools/adobe-photoshop-svgrepo-com.svg",
@@ -27,30 +30,6 @@ const toolIcons = {
   samsungnotes: "/tools/Samsung_Notes_icon_2025.svg"
 };
 
-const letterVariants = {
-  hidden: { opacity: 0, y: 5 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.2 }
-  },
-};
-
-const TypewriterText = ({ text, className = "" }: { text: string, className?: string }) => (
-  <>
-    {text.split("").map((char, i) => (
-      <motion.span
-        key={i}
-        variants={letterVariants}
-        className={`inline-block ${className}`}
-        style={{ whiteSpace: char === " " ? "pre" : "normal" }}
-      >
-        {char}
-      </motion.span>
-    ))}
-  </>
-);
-
 export const Hero = ({
   isHeaderFinished,
   setIsHeaderFinished
@@ -58,32 +37,11 @@ export const Hero = ({
   isHeaderFinished: boolean,
   setIsHeaderFinished: (v: boolean) => void
 }) => {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, -100]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-  const y3 = useTransform(scrollY, [0, 500], [0, -80]);
+  useEffect(() => {
+    setIsHeaderFinished(true);
+  }, [setIsHeaderFinished]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] },
-    },
-  };
-
-  // Select a few images for the mosaic
+  // Select a few images
   const mosaicImages = [
     thumbnailList[0] || logoList[0],
     logoList[1] || thumbnailList[1],
@@ -91,201 +49,151 @@ export const Hero = ({
     logoList[3] || thumbnailList[3],
   ].filter(Boolean);
 
-  const typewriterVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.04,
-      },
-    },
-  };
-
-  const cardRevealVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: 30 },
-    visible: (custom: { rotate: number, x: number }) => ({
-      opacity: 1,
-      scale: 1,
-      rotate: custom.rotate,
-      x: custom.x,
-      transition: { duration: 1, ease: "easeOut" }
-    })
-  };
-
   return (
-    <section className="relative pt-32 pb-24 md:pt-56 md:pb-48 px-6 min-h-[90vh] flex flex-col items-center justify-center text-center overflow-hidden bg-[#0A0A0A]">
-      {/* Background Lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[-5%] left-[-5%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[140px] mix-blend-screen opacity-70" />
-        <div className="absolute bottom-[-5%] right-[-5%] w-[50%] h-[50%] bg-purple-500/20 rounded-full blur-[140px] mix-blend-screen opacity-70" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_0%,transparent_70%)]" />
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-background px-6 py-24 md:py-0">
+      {/* Background Ambient Glow */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute top-[10%] right-[5%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-[5%] left-[10%] w-[400px] h-[400px] bg-primary/5 rounded-full blur-[150px]" />
       </div>
 
-      {/* Floating Project Mosaic (Hanzo Style) */}
-      <div className="absolute inset-0 pointer-events-none z-10 hidden lg:block">
-        {/* Card 1 - Top Left */}
-        <motion.div
-          style={{ y: y1 }}
-          variants={cardRevealVariants}
-          custom={{ rotate: -8, x: 0 }}
-          initial="hidden"
-          animate={isHeaderFinished ? "visible" : "hidden"}
-          className="absolute top-[20%] left-[8%] w-64"
-        >
+      <div className="container mx-auto max-w-7xl relative z-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+          {/* Left Column - Text Content */}
           <motion.div
-            animate={isHeaderFinished ? { y: [0, -20, 0] } : { y: 0 }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-            className="w-full aspect-[4/3] rounded-[32px] overflow-hidden border border-white/10 shadow-2xl bg-[#1A1A1A] group"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="flex flex-col items-start text-left"
           >
-            <img src={mosaicImages[0]} alt="Project 1" className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" />
-          </motion.div>
-        </motion.div>
+            {/* Badge */}
+            <div className="flex items-center gap-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm px-4 py-2 mb-8 font-medium">
+              <Sparkles className="w-4 h-4" />
+              Available for new projects
+            </div>
 
-        {/* Card 2 - Bottom Left */}
-        <motion.div
-          style={{ y: y2 }}
-          variants={cardRevealVariants}
-          custom={{ rotate: 6, x: 0 }}
-          initial="hidden"
-          animate={isHeaderFinished ? "visible" : "hidden"}
-          className="absolute bottom-[20%] left-[12%] w-56"
-        >
-          <motion.div
-            animate={isHeaderFinished ? { y: [0, -15, 0] } : { y: 0 }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1.1 }}
-            className="w-full aspect-square rounded-[32px] overflow-hidden border border-white/10 shadow-2xl bg-[#1A1A1A] group"
-          >
-            <img src={mosaicImages[1]} alt="Project 2" className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" />
-          </motion.div>
-        </motion.div>
+            {/* Main Heading */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-extrabold text-white leading-tight mb-6">
+              I'm <span className="font-script text-primary">Tanjib,</span>
+              <br />
+              Graphic Designer
+            </h1>
 
-        {/* Card 3 - Top Right */}
-        <motion.div
-          style={{ y: y3 }}
-          variants={cardRevealVariants}
-          custom={{ rotate: 12, x: 0 }}
-          initial="hidden"
-          animate={isHeaderFinished ? "visible" : "hidden"}
-          className="absolute top-[25%] right-[8%] w-60"
-        >
-          <motion.div
-            animate={isHeaderFinished ? { y: [0, -18, 0] } : { y: 0 }}
-            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="w-full aspect-video rounded-[32px] overflow-hidden border border-white/10 shadow-2xl bg-[#1A1A1A] group"
-          >
-            <img src={mosaicImages[2]} alt="Project 3" className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" />
-          </motion.div>
-        </motion.div>
+            {/* Subtitle */}
+            <p className="text-lg text-white/60 font-sans mb-10 max-w-lg leading-relaxed">
+              {siteConfig.heroSubtitle}
+            </p>
 
-        {/* Card 4 - Bottom Right */}
-        <motion.div
-          style={{ y: y1 }}
-          variants={cardRevealVariants}
-          custom={{ rotate: -4, x: 0 }}
-          initial="hidden"
-          animate={isHeaderFinished ? "visible" : "hidden"}
-          className="absolute bottom-[15%] right-[10%] w-64"
-        >
-          <motion.div
-            animate={isHeaderFinished ? { y: [0, -22, 0] } : { y: 0 }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
-            className="w-full aspect-[3/4] rounded-[32px] overflow-hidden border border-white/10 shadow-2xl bg-[#1A1A1A] group"
-          >
-            <img src={mosaicImages[3]} alt="Project 4" className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-700" />
-          </motion.div>
-        </motion.div>
-      </div>
-
-      <div className="container mx-auto max-w-5xl relative z-20">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col items-center"
-        >
-          <motion.div
-            variants={itemVariants}
-            initial="hidden"
-            animate={isHeaderFinished ? "visible" : "hidden"}
-            className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[11px] sm:text-[13px] mb-8 text-white/50 backdrop-blur-md shadow-sm font-medium tracking-tight"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-primary" />
-            Booking Open - Available for new projects
-          </motion.div>
-
-          <motion.h1
-            variants={typewriterVariants}
-            initial="hidden"
-            animate="visible"
-            onAnimationComplete={() => setIsHeaderFinished(true)}
-            className="text-4xl sm:text-6xl md:text-8xl lg:text-[110px] font-display font-black leading-[1.1] sm:leading-[1] mb-8 tracking-[-0.04em] text-white break-words"
-          >
-            <TypewriterText text="Unlimited " />
-            <TypewriterText text="Design" className="text-white/30 italic font-light" />
-            <br />
-            <TypewriterText text="for " />
-            <TypewriterText text="Solid" className="text-primary" />
-            <TypewriterText text=" Brands" />
-          </motion.h1>
-
-          <motion.p
-            variants={itemVariants}
-            initial="hidden"
-            animate={isHeaderFinished ? "visible" : "hidden"}
-            className="text-lg md:text-xl text-white/40 mb-12 max-w-2xl leading-relaxed font-medium mx-auto"
-          >
-            I am a graphic designer with four years of experience. I help startups and brands create beautiful, functional products.
-          </motion.p>
-
-          <motion.div
-            variants={itemVariants}
-            initial="hidden"
-            animate={isHeaderFinished ? "visible" : "hidden"}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <Button asChild size="lg" className="h-16 rounded-full px-10 text-lg font-bold bg-white text-black hover:bg-primary hover:text-white transition-all duration-300 shadow-xl cursor-pointer group">
-              <a href="#work" className="flex items-center">
-                Check our work
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Button>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            initial="hidden"
-            animate={isHeaderFinished ? "visible" : "hidden"}
-            className="mt-32 w-full max-w-5xl flex flex-col items-center gap-12"
-          >
-            <span className="text-sm font-bold text-white/30 tracking-tight">Tools I use every day</span>
-            <div className="flex flex-wrap gap-4 justify-center items-center">
-              {[
-                { img: toolIcons.photoshop, label: "Photoshop" },
-                { img: toolIcons.illustrator, label: "Illustrator" },
-                { img: toolIcons.figma, label: "Figma" },
-                { img: toolIcons.goodnotes, label: "Goodnotes" },
-                { img: toolIcons.samsungnotes, label: "Samsung Notes" }
-              ].map((tool, i) => (
-                <motion.div
-                  key={tool.label}
-                  whileHover={{ y: -5, backgroundColor: "rgba(255,255,255,0.05)" }}
-                  className="flex items-center gap-3 px-6 py-3 rounded-full border border-white/5 bg-white/[0.02] transition-colors group cursor-default shadow-lg backdrop-blur-sm"
-                >
-                  <div className="w-6 h-6 flex items-center justify-center">
-                    <img
-                      src={tool.img}
-                      alt={tool.label}
-                      className="w-full h-full object-contain filter brightness-90 group-hover:brightness-110 transition-all"
-                    />
-                  </div>
-                  <span className="text-[14px] font-bold text-white/50 group-hover:text-white transition-colors">
-                    {tool.label}
-                  </span>
-                </motion.div>
-              ))}
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 items-start">
+              <Button asChild size="lg" className="rounded-full bg-primary text-white hover:bg-primary/90 px-8 py-4 font-bold text-base shadow-lg cursor-pointer group h-14">
+                <a href="#work" className="flex items-center">
+                  Explore My Work
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="rounded-full border border-white/10 bg-transparent text-white hover:border-primary/50 hover:bg-primary/10 px-8 py-4 font-bold text-base cursor-pointer h-14">
+                <a href={siteConfig.resumeUrl} target="_blank" rel="noopener noreferrer">
+                  View Resume
+                </a>
+              </Button>
             </div>
           </motion.div>
+
+          {/* Right Column - Portrait Image + Stats */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.2 }}
+            className="w-full flex justify-center lg:justify-end relative"
+          >
+            {/* Orange glow behind image */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-primary/15 rounded-full blur-[100px] pointer-events-none" />
+
+            {/* Portrait container */}
+            <div className="relative w-full max-w-[420px]">
+              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-[3/4] relative group">
+                <img
+                  src={portraitPhoto}
+                  alt="Tanjib Ahmed — Graphic Designer"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent pointer-events-none" />
+              </div>
+
+              {/* Floating Stats Badge */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+                className="absolute -left-6 bottom-16 sm:-left-10 rounded-2xl bg-card border border-white/5 p-4 shadow-xl backdrop-blur-sm"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl font-display font-extrabold text-primary">4+</span>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-white/50 font-sans">Years</span>
+                    <span className="text-sm text-white font-semibold font-sans">Experience</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Floating Projects Badge */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+                className="absolute -right-4 top-12 sm:-right-8 rounded-2xl bg-card border border-white/5 p-4 shadow-xl backdrop-blur-sm"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl font-display font-extrabold text-primary">50+</span>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-white/50 font-sans">Happy</span>
+                    <span className="text-sm text-white font-semibold font-sans">Clients</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Tools Section at Bottom */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1 }}
+          className="mt-24 w-full border-t border-white/5 pt-10 flex flex-col lg:flex-row items-center justify-between gap-8"
+        >
+          <span className="text-sm font-medium text-white/40 font-sans">
+            Tools I use every day
+          </span>
+          <div className="flex flex-wrap gap-3 justify-center items-center">
+            {[
+              { img: toolIcons.photoshop, label: "Photoshop" },
+              { img: toolIcons.illustrator, label: "Illustrator" },
+              { img: toolIcons.figma, label: "Figma" },
+              { img: toolIcons.goodnotes, label: "Goodnotes" },
+              { img: toolIcons.samsungnotes, label: "Samsung Notes" }
+            ].map((tool) => (
+              <div
+                key={tool.label}
+                className="flex items-center gap-3 rounded-xl bg-card border border-white/5 px-4 py-2 transition-all duration-300 group cursor-default hover:border-primary/50 hover:bg-primary/10"
+              >
+                <div className="w-5 h-5 flex items-center justify-center">
+                  <img
+                    src={tool.img}
+                    alt={tool.label}
+                    className="w-full h-full object-contain transition-all"
+                  />
+                </div>
+                <span className="text-sm font-medium text-white/50 group-hover:text-white transition-colors font-sans">
+                  {tool.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </motion.div>
+
       </div>
     </section>
   );
