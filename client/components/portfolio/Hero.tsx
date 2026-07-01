@@ -220,12 +220,10 @@ export const Hero = ({
             onAnimationComplete={() => setIsHeaderFinished(true)}
             className="text-4xl sm:text-6xl md:text-8xl lg:text-[110px] font-display font-black leading-[1.1] sm:leading-[1] mb-8 tracking-[-0.04em] text-white break-words"
           >
-            <TypewriterText text="Unlimited " />
-            <TypewriterText text="Design" className="text-white/30 italic font-light" />
+            <TypewriterText text="Tanjib Ahmed " />
+            <TypewriterText text="-" className="text-white/30 font-light" />
             <br />
-            <TypewriterText text="for " />
-            <TypewriterText text="Solid" className="text-primary" />
-            <TypewriterText text=" Brands" />
+            <TypewriterText text="Graphic Designer" className="text-primary" />
           </motion.h1>
 
           <motion.p
@@ -234,7 +232,7 @@ export const Hero = ({
             animate={isHeaderFinished ? "visible" : "hidden"}
             className="text-lg md:text-xl text-white/40 mb-12 max-w-2xl leading-relaxed font-medium mx-auto"
           >
-            I am a graphic designer with four years of experience. I help startups and brands create beautiful, functional products.
+            {siteConfig.heroSubtitle}
           </motion.p>
 
           <motion.div

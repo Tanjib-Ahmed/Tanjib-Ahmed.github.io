@@ -9,8 +9,24 @@ function shuffleArray<T>(array: T[]): T[] {
     return newArray;
 }
 
-export const OtherDesigns = ({ items }: { items: string[] }) => {
+export const OtherDesigns = ({ items }: { items: { path: string, url: string }[] }) => {
     if (items.length === 0) return null;
+
+    const getCleanProjectName = (path: string) => {
+        const filename = path.split('/').pop() || "";
+        const nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')) || filename;
+        
+        // Clean up typical designer versionings or prefixes, e.g. "MistiBake Studio-01" -> "MistiBake Studio"
+        const cleaned = nameWithoutExt
+          .replace(/[-_]\d+$/g, '') // remove trailing -01, -02
+          .replace(/\s+copy$/gi, '') // remove trailing " copy"
+          .replace(/\s+v\d+$/gi, '') // remove trailing " v2"
+          .replace(/[-_]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+      
+        return cleaned;
+    };
 
     // Split items into 3 rows for the grid
     const rows = useMemo(() => {
@@ -60,8 +76,8 @@ export const OtherDesigns = ({ items }: { items: string[] }) => {
                                         {/* Image Container with Fog/Hazy Border Effect */}
                                         <div className="absolute inset-0 overflow-hidden transition-all duration-700 rounded-[2rem] border border-white/5 bg-[#0D0D0D] group-hover/item:scale-[0.98]">
                                             <img
-                                                src={item}
-                                                alt={`Other design base ${rowIndex}-${index}`}
+                                                src={item.url}
+                                                alt={`Creative graphic design exploration of ${getCleanProjectName(item.path)} by Tanjib Ahmed, Graphic Designer Bangladesh`}
                                                 className="h-full w-full object-cover grayscale opacity-40 transition-all duration-700 group-hover/item:scale-110 group-hover/item:opacity-60"
                                                 loading="lazy"
                                                 decoding="async"
@@ -74,8 +90,8 @@ export const OtherDesigns = ({ items }: { items: string[] }) => {
                                         {/* Hover Popout Image (Hanzo Influence) */}
                                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex items-center justify-center opacity-0 scale-90 group-hover/item:opacity-100 group-hover/item:scale-100 transition-all duration-500 pointer-events-none">
                                             <img
-                                                src={item}
-                                                alt={`Other design full ${rowIndex}-${index}`}
+                                                src={item.url}
+                                                alt={`Full creative graphic design preview of ${getCleanProjectName(item.path)} by Tanjib Ahmed`}
                                                 className="w-auto h-auto min-w-[200px] max-w-[85vw] max-h-[250px] md:max-h-[350px] object-contain rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-white/10"
                                                 loading="lazy"
                                                 decoding="async"

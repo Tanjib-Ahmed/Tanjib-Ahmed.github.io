@@ -8,10 +8,40 @@ const thumbnailImages = import.meta.glob('@/assets/projects/thumbnails/*', { eag
 const socialImages = import.meta.glob('@/assets/projects/socials/*', { eager: true, query: '?url', import: 'default' });
 const otherImages = import.meta.glob('@/assets/projects/other/*', { eager: true, query: '?url', import: 'default' });
 
-const logoList = Object.values(logoImages) as string[];
-const thumbnailList = Object.values(thumbnailImages) as string[];
-const socialList = Object.values(socialImages) as string[];
-const otherList = Object.values(otherImages) as string[];
+const logoList = Object.entries(logoImages).map(([path, url]) => ({ path, url: url as string }));
+const thumbnailList = Object.entries(thumbnailImages).map(([path, url]) => ({ path, url: url as string }));
+const socialList = Object.entries(socialImages).map(([path, url]) => ({ path, url: url as string }));
+const otherList = Object.entries(otherImages).map(([path, url]) => ({ path, url: url as string }));
+
+const getCleanProjectName = (path: string) => {
+  const filename = path.split('/').pop() || "";
+  const nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')) || filename;
+  
+  // Clean up typical designer versionings or prefixes, e.g. "MistiBake Studio-01" -> "MistiBake Studio"
+  const cleaned = nameWithoutExt
+    .replace(/[-_]\d+$/g, '') // remove trailing -01, -02
+    .replace(/\s+copy$/gi, '') // remove trailing " copy"
+    .replace(/\s+v\d+$/gi, '') // remove trailing " v2"
+    .replace(/[-_]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  return cleaned;
+};
+
+const getAltText = (title: string, path: string) => {
+  const projName = getCleanProjectName(path);
+  switch (title) {
+    case "Logos":
+      return `Logo design for ${projName} by Tanjib Ahmed, professional Graphic Designer in Bangladesh`;
+    case "Thumbnails":
+      return `YouTube video thumbnail design for ${projName} by Tanjib Ahmed, Graphic Designer Bangladesh`;
+    case "Social Media Posts":
+      return `Social media post graphic design for ${projName} by Tanjib Ahmed, Graphic Designer BD`;
+    default:
+      return `Creative graphic design project for ${projName} by Tanjib Ahmed, Graphic Designer Dhaka`;
+  }
+};
 
 const CarouselRow = ({
   title,
@@ -21,7 +51,7 @@ const CarouselRow = ({
   aspectRatio = 16 / 10,
 }: {
   title: string,
-  items: string[],
+  items: { path: string, url: string }[],
   direction?: "left" | "right",
   speed?: string,
   aspectRatio?: number | "mixed",
@@ -69,8 +99,8 @@ const CarouselRow = ({
                   {/* Image Container - Clean look for main rows */}
                   <div className="absolute inset-0 overflow-hidden transition-all duration-700 rounded-[2.5rem] border border-white/5 bg-[#0D0D0D] group-hover/item:scale-[0.98]">
                     <img
-                      src={item}
-                      alt={`${title} project`}
+                      src={item.url}
+                      alt={getAltText(title, item.path)}
                       className="object-cover w-full h-full transition-all duration-700 group-hover/item:scale-110"
                       loading="lazy"
                       decoding="async"
