@@ -5,7 +5,7 @@ export const siteConfig = {
     logoText: "TANJIB AHMED.",
     logoImage: "/assets/logo.png", // Add your logo image at client/assets/logo.png
     heroTitle: "I Design Graphics That Stand Out.",
-    heroSubtitle: "Tanjib Ahmed — Graphic Designer based in Dhaka, Bangladesh. I am a graphic designer in Bangladesh with four years of experience, helping brands with high-impact social media designs, brand assets, and promotional visuals.",
+    heroSubtitle: "Tanjib Ahmed, a Graphic Designer based in Dhaka, Bangladesh. I am a graphic designer in Bangladesh with four years of experience, helping brands with high-impact social media designs, brand assets, and promotional visuals.",
     resumeUrl: "https://drive.google.com/file/d/1oxK6vYlwm2wFUK81BwHBEyOkn05bRGAm/view?usp=sharing", // Add your resume link here
     inquiryEmail: "tanjib.tanjib204@gmail.com",
     socialLinks,

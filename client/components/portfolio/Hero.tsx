@@ -221,7 +221,6 @@ export const Hero = ({
             className="text-4xl sm:text-6xl md:text-8xl lg:text-[110px] font-display font-black leading-[1.1] sm:leading-[1] mb-8 tracking-[-0.04em] text-white break-words"
           >
             <TypewriterText text="Tanjib Ahmed " />
-            <TypewriterText text="-" className="text-white/30 font-light" />
             <br />
             <TypewriterText text="Graphic Designer" className="text-primary" />
           </motion.h1>
