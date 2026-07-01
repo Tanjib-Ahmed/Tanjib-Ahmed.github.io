@@ -87,17 +87,12 @@
 </head>
 
 <body>
-  <div id="root">
-    <!-- Initial HTML fallback for SEO and slow connections -->
-    <div style="padding: 3rem; font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; color: #f2f2f2; background-color: #0b0b1a; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-      <h1 style="font-size: 2rem; margin-bottom: 1rem; font-weight: 800;">Tanjib Ahmed, a Graphic Designer based in Dhaka, Bangladesh</h1>
-      <p style="font-size: 1.1rem; line-height: 1.6; color: rgba(255,255,255,0.7); max-w: 500px;">
-        I am a graphic designer in Bangladesh, helping brands with social media, brand assets, and promotional visuals.
-      </p>
-      <div style="margin-top: 2rem; font-size: 0.9rem; color: #f97316; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;">
-        Loading Portfolio...
-      </div>
-    </div>
+  <div id="root"></div>
+  
+  <!-- Visually hidden fallback for SEO indexation without visual flashing -->
+  <div style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;">
+    <h1>Tanjib Ahmed, a Graphic Designer based in Dhaka, Bangladesh</h1>
+    <p>I am a graphic designer in Bangladesh, helping brands with social media, brand assets, and promotional visuals.</p>
   </div>
 
   <script type="module" src="/client/App.tsx"></script>
